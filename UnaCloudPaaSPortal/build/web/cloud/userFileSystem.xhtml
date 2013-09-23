@@ -1,0 +1,44 @@
+<ui:composition template="/templates/contextTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:param name="titulotab" value="User File System" />
+    <ui:define name="body">
+        <h:form id="formTable">
+            <p:dataTable id="fileTable" value="#{fileSystemBean.list}" var="file">
+                <p:column headerText="Name">
+                    <h:outputText value="#{file.name}"/>
+                </p:column>
+                <p:column headerText="Path">
+                    <h:outputText value="#{file.path}"/>
+                </p:column>
+                <p:column headerText="Options">
+                    <p:commandButton value="delete" ajax="true" action="#{fileSystemBean.deleteFile(file.name,file.path)}" update="fileTable" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form enctype="multipart/form-data">
+            <p:fileUpload fileUploadListener="#{fileSystemAddBean.handleFileUpload}"  
+                          mode="advanced"  
+                          label="Add file"
+                          update=":formUpdate"
+                          auto="true"
+                          sizeLimit="100000000"/>
+        </h:form>
+        <p:dialog header="Add new file" id="addFileDialog" widgetVar="addFileDialogWv">
+            <h:form id="formUpdate">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Name:"/>
+                    <p:inputText value="#{fileSystemAddBean.name}"/>
+                    <h:outputLabel value="Path:"/>
+                    <p:inputText value="#{fileSystemAddBean.path}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Cancel" onclick="addFileDialogWv.hide();"/>
+                    <p:commandButton ajax="true" value="Add" action="#{fileSystemAddBean.addFile()}" update=":formTable:fileTable" oncomplete="addFileDialogWv.hide();" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

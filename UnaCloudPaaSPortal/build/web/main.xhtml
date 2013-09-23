@@ -1,0 +1,9 @@
+<ui:composition template="/templates/contextTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:param name="titulotab" value="Start" />
+    <ui:define name="body">
+        <h:outputLabel value="Welcome to UnaCloud, the better way to run your HPC apps at lower cost. #{facesContext.externalContext.isUserInRole('ADMIN')} user:#{facesContext.externalContext.remoteUser}" />
+    </ui:define>
+</ui:composition>

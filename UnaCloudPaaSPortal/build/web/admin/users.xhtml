@@ -1,0 +1,25 @@
+<ui:composition template="/templates/contextTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:param name="titulotab" value="Users" />
+    <ui:define name="body">
+        <p:dataTable var="v" value="${userAdminBean.userList}" >
+            <p:column headerText="Username">
+                <h:outputText value="${v.username}" />
+            </p:column>
+            <p:column headerText="Name">
+                <h:outputText value="${v.firstname} ${v.lastname}" />
+            </p:column>
+            <p:column headerText="Email">
+                <h:outputText value="${v.email}" />
+            </p:column>
+            <p:column headerText="User folder">
+                <h:outputText value="${v.hash}" />
+            </p:column>
+            <p:column headerText="Active">
+                <p:selectBooleanCheckbox value="${v.activated}" disabled="true" />
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>

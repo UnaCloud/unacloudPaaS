@@ -1,0 +1,78 @@
+<ui:composition template="/templates/contextTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:param name="titulotab" value="Running platforms" />
+    <f:metadata>
+        <f:viewParam name="platformExecutionId" value="#{platformExecutionBean.selectedId}"/>
+    </f:metadata>
+    <ui:define name="body">
+        <h:panelGroup>
+            <h:panelGrid columns="2" style="min-width: 600px;" columnClasses="alignTop,alignRightTop">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Id:" />
+                    <h:outputText value="#{platformExecutionBean.selectedPlatform.id}" />
+                    <h:outputLabel value="Hex Id:" />
+                    <h:outputText value="#{platformExecutionBean.selectedPlatform.hexId}" />
+                    <h:outputLabel value="Run name:" />
+                    <h:outputText value="#{platformExecutionBean.selectedPlatform.runName}" />
+                    <h:outputLabel value="State:" />
+                    <h:outputText value="#{platformExecutionBean.selectedPlatform.stateName}" />
+                    <h:outputLabel value="Roles:" />
+                    <h:outputText value="#{platformExecutionBean.selectedPlatform.roles.size()}" />
+                </h:panelGrid>
+                <h:graphicImage height="60px" value="/resources/platform-logos/${platformExecutionBean.selectedPlatform.platform.image}"/>
+            </h:panelGrid>
+
+            <p:accordionPanel activeIndex="-1" value="#{platformExecutionBean.selectedPlatform.roles}" var="role" style="min-width: 600px;padding-top: 10px;" >
+                <p:tab title="Role: #{role.roleConfig.roleName}">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Size:" />
+                        <h:outputText value="#{role.size}"/>
+                        <h:outputLabel value="Template id:" />
+                        <h:outputText value="#{role.roleConfig.templateId}"/>
+                        <h:outputLabel value="Main puppet module:" />
+                        <h:outputText value="#{role.roleConfig.puppetModule.puppetmodule.name}"/>
+                    </h:panelGrid>
+                    <p:panel header="Nodes" toggleTitle="Nodes" collapsed="true" toggleable="true" toggleOrientation="horizontal">
+                        <p:dataTable value="${role.nodes}" var="node">
+                            <p:column headerText="Hostname" >
+                                <h:outputText value="${node.hostname}"/>
+                            </p:column>
+                            <p:column headerText="Ip Address" >
+                                <h:outputText value="${node.ip}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+
+                </p:tab>
+            </p:accordionPanel>
+            <p:commandButton id="showButton" value="Show log">  
+                <f:setPropertyActionListener value="#{true}" target="#{requestScope.renderCampNou}" />  
+            </p:commandButton>
+            <p:outputPanel id="panel" autoUpdate="true">  
+                <p:dataTable value="#{platformExecutionBean.log}" var="log" rendered="#{requestScope.renderCampNou}">
+                    <p:column headerText="Time">
+                        <h:outputText value="#{log.time}">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="RT">
+                        <h:outputText value="#{log.relativeTime}" />
+                    </p:column>
+                    <p:column headerText="Component">
+                        <h:outputText value="#{log.component}" />
+                    </p:column>
+                    <p:column headerText="Text">
+                        <ui:repeat value="#{log.logLines}" var="ll">
+                            <h:outputText value="#{ll}" /><br/>
+                        </ui:repeat>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

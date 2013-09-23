@@ -1,0 +1,32 @@
+<ui:composition template="/templates/contextTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:param name="titulotab" value="Running platforms" />
+    <ui:define name="body">
+        <h:form>
+            <p:dataTable id="runningTable" value="#{platformExecutionListBean.runningList}" var="r">
+                <p:column headerText="Id">
+                    <h:outputText value="#{r.id}" />
+                </p:column>
+                <p:column headerText="Run name">
+                    <h:outputText value="#{r.runName}" />
+                </p:column>
+                <p:column headerText="Plaftorm">
+                    <h:outputText value="#{r.platform.name}" />
+                </p:column>
+                <p:column headerText="State">
+                    <h:outputText value="#{r.stateName}" />
+                </p:column>
+                <p:column headerText="Options">
+                    <h:button outcome="platformExecutionDetail" image="/resources/icons/view.png">
+                        <f:param name="platformExecutionId" value="#{r.id}" />   
+                    </h:button>
+                    <h:commandButton rendered="${r.state == 3}" image="/resources/icons/stop-red.png" action="#{platformExecutionListBean.stopPlatform(r.id)}"/>
+                </p:column>
+            </p:dataTable>
+            <p:poll autoStart="true" update="runningTable" interval="10" />
+        </h:form>
+    </ui:define>
+</ui:composition>
