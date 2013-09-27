@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para turnOffVirtualMachine complex type.
+ * <p>Java class for turnOffVirtualMachine complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="turnOffVirtualMachine">
@@ -40,7 +40,7 @@ public class TurnOffVirtualMachine {
     protected String virtualMachineExID;
 
     /**
-     * Obtiene el valor de la propiedad username.
+     * Gets the value of the username property.
      * 
      * @return
      *     possible object is
@@ -52,7 +52,7 @@ public class TurnOffVirtualMachine {
     }
 
     /**
-     * Define el valor de la propiedad username.
+     * Sets the value of the username property.
      * 
      * @param value
      *     allowed object is
@@ -64,7 +64,7 @@ public class TurnOffVirtualMachine {
     }
 
     /**
-     * Obtiene el valor de la propiedad pass.
+     * Gets the value of the pass property.
      * 
      * @return
      *     possible object is
@@ -76,7 +76,7 @@ public class TurnOffVirtualMachine {
     }
 
     /**
-     * Define el valor de la propiedad pass.
+     * Sets the value of the pass property.
      * 
      * @param value
      *     allowed object is
@@ -88,7 +88,7 @@ public class TurnOffVirtualMachine {
     }
 
     /**
-     * Obtiene el valor de la propiedad virtualMachineExID.
+     * Gets the value of the virtualMachineExID property.
      * 
      * @return
      *     possible object is
@@ -100,7 +100,7 @@ public class TurnOffVirtualMachine {
     }
 
     /**
-     * Define el valor de la propiedad virtualMachineExID.
+     * Sets the value of the virtualMachineExID property.
      * 
      * @param value
      *     allowed object is

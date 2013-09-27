@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para getAvailableUnaCloudResources complex type.
+ * <p>Java class for getAvailableUnaCloudResources complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="getAvailableUnaCloudResources">
@@ -40,7 +40,7 @@ public class GetAvailableUnaCloudResources {
     protected int machineRam;
 
     /**
-     * Obtiene el valor de la propiedad machineDisk.
+     * Gets the value of the machineDisk property.
      * 
      */
     public int getMachineDisk() {
@@ -48,7 +48,7 @@ public class GetAvailableUnaCloudResources {
     }
 
     /**
-     * Define el valor de la propiedad machineDisk.
+     * Sets the value of the machineDisk property.
      * 
      */
     public void setMachineDisk(int value) {
@@ -56,7 +56,7 @@ public class GetAvailableUnaCloudResources {
     }
 
     /**
-     * Obtiene el valor de la propiedad machineCores.
+     * Gets the value of the machineCores property.
      * 
      */
     public int getMachineCores() {
@@ -64,7 +64,7 @@ public class GetAvailableUnaCloudResources {
     }
 
     /**
-     * Define el valor de la propiedad machineCores.
+     * Sets the value of the machineCores property.
      * 
      */
     public void setMachineCores(int value) {
@@ -72,7 +72,7 @@ public class GetAvailableUnaCloudResources {
     }
 
     /**
-     * Obtiene el valor de la propiedad machineRam.
+     * Gets the value of the machineRam property.
      * 
      */
     public int getMachineRam() {
@@ -80,7 +80,7 @@ public class GetAvailableUnaCloudResources {
     }
 
     /**
-     * Define el valor de la propiedad machineRam.
+     * Sets the value of the machineRam property.
      * 
      */
     public void setMachineRam(int value) {

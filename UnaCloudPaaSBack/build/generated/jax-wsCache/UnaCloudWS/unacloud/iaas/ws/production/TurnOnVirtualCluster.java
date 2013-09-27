@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para turnOnVirtualCluster complex type.
+ * <p>Java class for turnOnVirtualCluster complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="turnOnVirtualCluster">
@@ -55,7 +55,7 @@ public class TurnOnVirtualCluster {
     protected int time;
 
     /**
-     * Obtiene el valor de la propiedad username.
+     * Gets the value of the username property.
      * 
      * @return
      *     possible object is
@@ -67,7 +67,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad username.
+     * Sets the value of the username property.
      * 
      * @param value
      *     allowed object is
@@ -79,7 +79,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Obtiene el valor de la propiedad pass.
+     * Gets the value of the pass property.
      * 
      * @return
      *     possible object is
@@ -91,7 +91,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad pass.
+     * Sets the value of the pass property.
      * 
      * @param value
      *     allowed object is
@@ -103,7 +103,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Obtiene el valor de la propiedad templateID.
+     * Gets the value of the templateID property.
      * 
      */
     public int getTemplateID() {
@@ -111,7 +111,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad templateID.
+     * Sets the value of the templateID property.
      * 
      */
     public void setTemplateID(int value) {
@@ -119,7 +119,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Obtiene el valor de la propiedad size.
+     * Gets the value of the size property.
      * 
      */
     public int getSize() {
@@ -127,7 +127,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad size.
+     * Sets the value of the size property.
      * 
      */
     public void setSize(int value) {
@@ -135,7 +135,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Obtiene el valor de la propiedad ram.
+     * Gets the value of the ram property.
      * 
      */
     public int getRam() {
@@ -143,7 +143,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad ram.
+     * Sets the value of the ram property.
      * 
      */
     public void setRam(int value) {
@@ -151,7 +151,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Obtiene el valor de la propiedad cores.
+     * Gets the value of the cores property.
      * 
      */
     public int getCores() {
@@ -159,7 +159,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad cores.
+     * Sets the value of the cores property.
      * 
      */
     public void setCores(int value) {
@@ -167,7 +167,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Obtiene el valor de la propiedad hdSize.
+     * Gets the value of the hdSize property.
      * 
      */
     public int getHdSize() {
@@ -175,7 +175,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad hdSize.
+     * Sets the value of the hdSize property.
      * 
      */
     public void setHdSize(int value) {
@@ -183,7 +183,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Obtiene el valor de la propiedad time.
+     * Gets the value of the time property.
      * 
      */
     public int getTime() {
@@ -191,7 +191,7 @@ public class TurnOnVirtualCluster {
     }
 
     /**
-     * Define el valor de la propiedad time.
+     * Sets the value of the time property.
      * 
      */
     public void setTime(int value) {

@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para templateWS complex type.
+ * <p>Java class for templateWS complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="templateWS">
@@ -85,7 +85,7 @@ public class TemplateWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad customizable.
+     * Gets the value of the customizable property.
      * 
      */
     public boolean isCustomizable() {
@@ -93,7 +93,7 @@ public class TemplateWS {
     }
 
     /**
-     * Define el valor de la propiedad customizable.
+     * Sets the value of the customizable property.
      * 
      */
     public void setCustomizable(boolean value) {
@@ -101,7 +101,7 @@ public class TemplateWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad highAvailability.
+     * Gets the value of the highAvailability property.
      * 
      */
     public boolean isHighAvailability() {
@@ -109,7 +109,7 @@ public class TemplateWS {
     }
 
     /**
-     * Define el valor de la propiedad highAvailability.
+     * Sets the value of the highAvailability property.
      * 
      */
     public void setHighAvailability(boolean value) {
@@ -117,7 +117,7 @@ public class TemplateWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad operatingSystem.
+     * Gets the value of the operatingSystem property.
      * 
      * @return
      *     possible object is
@@ -129,7 +129,7 @@ public class TemplateWS {
     }
 
     /**
-     * Define el valor de la propiedad operatingSystem.
+     * Sets the value of the operatingSystem property.
      * 
      * @param value
      *     allowed object is
@@ -141,7 +141,7 @@ public class TemplateWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad templateCode.
+     * Gets the value of the templateCode property.
      * 
      * @return
      *     possible object is
@@ -153,7 +153,7 @@ public class TemplateWS {
     }
 
     /**
-     * Define el valor de la propiedad templateCode.
+     * Sets the value of the templateCode property.
      * 
      * @param value
      *     allowed object is
@@ -165,7 +165,7 @@ public class TemplateWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad templateName.
+     * Gets the value of the templateName property.
      * 
      * @return
      *     possible object is
@@ -177,7 +177,7 @@ public class TemplateWS {
     }
 
     /**
-     * Define el valor de la propiedad templateName.
+     * Sets the value of the templateName property.
      * 
      * @param value
      *     allowed object is
@@ -189,7 +189,7 @@ public class TemplateWS {
     }
 
     /**
-     * Obtiene el valor de la propiedad templateType.
+     * Gets the value of the templateType property.
      * 
      * @return
      *     possible object is
@@ -201,7 +201,7 @@ public class TemplateWS {
     }
 
     /**
-     * Define el valor de la propiedad templateType.
+     * Sets the value of the templateType property.
      * 
      * @param value
      *     allowed object is
