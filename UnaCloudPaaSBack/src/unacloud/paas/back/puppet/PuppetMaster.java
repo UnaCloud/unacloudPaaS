@@ -91,7 +91,7 @@ public class PuppetMaster{
          }
       }
       for(RoleExecution role : platform.getRoles()){
-         role.executeCommandOnRole("puppet agent --test",5000);
+         role.executeCommandOnRole("puppet agent --test");
       }
       String nodeList="";
       for(int e=0;e<nodeNames.size();e++){
@@ -105,7 +105,7 @@ public class PuppetMaster{
       }
       if(!nodeList.isEmpty())new ProcessManager(null, "puppet cert sign"+nodeList).waitFor();
       for(RoleExecution role : platform.getRoles()){
-         role.executeCommandOnRole("puppet agent --test",10000);
+         role.executeCommandOnRole("puppet agent --test",5000);
       }
    }
    public static void stopPuppetCluster(List<NodeExecution> cluster){

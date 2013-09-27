@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para getAvailableVirtualMachines complex type.
+ * <p>Java class for getAvailableVirtualMachines complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="getAvailableVirtualMachines">
@@ -49,7 +49,7 @@ public class GetAvailableVirtualMachines {
     protected String password;
 
     /**
-     * Obtiene el valor de la propiedad templateSelected.
+     * Gets the value of the templateSelected property.
      * 
      */
     public int getTemplateSelected() {
@@ -57,7 +57,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Define el valor de la propiedad templateSelected.
+     * Sets the value of the templateSelected property.
      * 
      */
     public void setTemplateSelected(int value) {
@@ -65,7 +65,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Obtiene el valor de la propiedad virtualMachineDisk.
+     * Gets the value of the virtualMachineDisk property.
      * 
      */
     public int getVirtualMachineDisk() {
@@ -73,7 +73,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Define el valor de la propiedad virtualMachineDisk.
+     * Sets the value of the virtualMachineDisk property.
      * 
      */
     public void setVirtualMachineDisk(int value) {
@@ -81,7 +81,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Obtiene el valor de la propiedad virtualMachineCores.
+     * Gets the value of the virtualMachineCores property.
      * 
      */
     public int getVirtualMachineCores() {
@@ -89,7 +89,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Define el valor de la propiedad virtualMachineCores.
+     * Sets the value of the virtualMachineCores property.
      * 
      */
     public void setVirtualMachineCores(int value) {
@@ -97,7 +97,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Obtiene el valor de la propiedad virtualMachineRAM.
+     * Gets the value of the virtualMachineRAM property.
      * 
      */
     public int getVirtualMachineRAM() {
@@ -105,7 +105,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Define el valor de la propiedad virtualMachineRAM.
+     * Sets the value of the virtualMachineRAM property.
      * 
      */
     public void setVirtualMachineRAM(int value) {
@@ -113,7 +113,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Obtiene el valor de la propiedad user.
+     * Gets the value of the user property.
      * 
      * @return
      *     possible object is
@@ -125,7 +125,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Define el valor de la propiedad user.
+     * Sets the value of the user property.
      * 
      * @param value
      *     allowed object is
@@ -137,7 +137,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Obtiene el valor de la propiedad password.
+     * Gets the value of the password property.
      * 
      * @return
      *     possible object is
@@ -149,7 +149,7 @@ public class GetAvailableVirtualMachines {
     }
 
     /**
-     * Define el valor de la propiedad password.
+     * Sets the value of the password property.
      * 
      * @param value
      *     allowed object is

@@ -83,7 +83,6 @@ public class ClusterManager{
                execution.configurePlatform();
                PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Executing commands..."));
                execution.executeCommands();
-               PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Executing commands 2..."));
                PlatformExecutionManager.updatePlatformExecutionState(platformExecutionId, ExecutionState.RUNNING.getId());
                PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Running..."));
             }catch(Throwable ex){

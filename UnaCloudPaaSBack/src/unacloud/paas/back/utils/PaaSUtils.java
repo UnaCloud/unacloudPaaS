@@ -1,12 +1,9 @@
 package unacloud.paas.back.utils;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PaaSUtils{
     public static void sleep(long l){
@@ -32,16 +29,5 @@ public class PaaSUtils{
             e.printStackTrace();
         }
         return "";
-    }
-    public static void waitForFile(){
-        long l=System.currentTimeMillis();
-        long f=(l/(60000l)+1)*60000l;
-        try {
-            while(!new File("/start.txt").exists()){
-                Thread.sleep(f-l);
-            }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(PaaSUtils.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

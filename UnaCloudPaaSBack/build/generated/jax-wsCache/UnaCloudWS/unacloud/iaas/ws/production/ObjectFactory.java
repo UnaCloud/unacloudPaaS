@@ -27,12 +27,10 @@ public class ObjectFactory {
     private final static QName _GetTotalVirtualMachines_QNAME = new QName("http://wss.losandes.com/", "getTotalVirtualMachines");
     private final static QName _GetTotalUnaCloudResourcesResponse_QNAME = new QName("http://wss.losandes.com/", "getTotalUnaCloudResourcesResponse");
     private final static QName _WriteFileOnVirtualMachine_QNAME = new QName("http://wss.losandes.com/", "writeFileOnVirtualMachine");
-    private final static QName _TurnOnVirtualClusterCCGrid_QNAME = new QName("http://wss.losandes.com/", "turnOnVirtualClusterCCGrid");
     private final static QName _TurnOffVirtualMachineResponse_QNAME = new QName("http://wss.losandes.com/", "turnOffVirtualMachineResponse");
     private final static QName _GetBusyUnaCloudResources_QNAME = new QName("http://wss.losandes.com/", "getBusyUnaCloudResources");
     private final static QName _GetVirtualMachineExecutionsResponse_QNAME = new QName("http://wss.losandes.com/", "getVirtualMachineExecutionsResponse");
     private final static QName _GetTotalVirtualMachinesResponse_QNAME = new QName("http://wss.losandes.com/", "getTotalVirtualMachinesResponse");
-    private final static QName _TurnOnVirtualClusterCCGridResponse_QNAME = new QName("http://wss.losandes.com/", "turnOnVirtualClusterCCGridResponse");
     private final static QName _TurnOnVirtualClusterResponse_QNAME = new QName("http://wss.losandes.com/", "turnOnVirtualClusterResponse");
     private final static QName _GetVirtualMachineExecutions_QNAME = new QName("http://wss.losandes.com/", "getVirtualMachineExecutions");
     private final static QName _GetAvailableVirtualMachines_QNAME = new QName("http://wss.losandes.com/", "getAvailableVirtualMachines");
@@ -60,14 +58,6 @@ public class ObjectFactory {
      */
     public WriteFileOnVirtualMachine createWriteFileOnVirtualMachine() {
         return new WriteFileOnVirtualMachine();
-    }
-
-    /**
-     * Create an instance of {@link TurnOnVirtualClusterCCGrid }
-     * 
-     */
-    public TurnOnVirtualClusterCCGrid createTurnOnVirtualClusterCCGrid() {
-        return new TurnOnVirtualClusterCCGrid();
     }
 
     /**
@@ -124,14 +114,6 @@ public class ObjectFactory {
      */
     public TurnOnVirtualClusterResponse createTurnOnVirtualClusterResponse() {
         return new TurnOnVirtualClusterResponse();
-    }
-
-    /**
-     * Create an instance of {@link TurnOnVirtualClusterCCGridResponse }
-     * 
-     */
-    public TurnOnVirtualClusterCCGridResponse createTurnOnVirtualClusterCCGridResponse() {
-        return new TurnOnVirtualClusterCCGridResponse();
     }
 
     /**
@@ -282,15 +264,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TurnOnVirtualClusterCCGrid }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://wss.losandes.com/", name = "turnOnVirtualClusterCCGrid")
-    public JAXBElement<TurnOnVirtualClusterCCGrid> createTurnOnVirtualClusterCCGrid(TurnOnVirtualClusterCCGrid value) {
-        return new JAXBElement<TurnOnVirtualClusterCCGrid>(_TurnOnVirtualClusterCCGrid_QNAME, TurnOnVirtualClusterCCGrid.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TurnOffVirtualMachineResponse }{@code >}}
      * 
      */
@@ -324,15 +297,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://wss.losandes.com/", name = "getTotalVirtualMachinesResponse")
     public JAXBElement<GetTotalVirtualMachinesResponse> createGetTotalVirtualMachinesResponse(GetTotalVirtualMachinesResponse value) {
         return new JAXBElement<GetTotalVirtualMachinesResponse>(_GetTotalVirtualMachinesResponse_QNAME, GetTotalVirtualMachinesResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TurnOnVirtualClusterCCGridResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://wss.losandes.com/", name = "turnOnVirtualClusterCCGridResponse")
-    public JAXBElement<TurnOnVirtualClusterCCGridResponse> createTurnOnVirtualClusterCCGridResponse(TurnOnVirtualClusterCCGridResponse value) {
-        return new JAXBElement<TurnOnVirtualClusterCCGridResponse>(_TurnOnVirtualClusterCCGridResponse_QNAME, TurnOnVirtualClusterCCGridResponse.class, null, value);
     }
 
     /**
