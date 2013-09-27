@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 package unacloud.iaas.ws;
+
 import unacloud.iaas.ws.production.*;
+
 /**
  *
  * @author Clouder
@@ -29,6 +31,11 @@ public class UnaCloudOperations{
       UnaCloudWSService service=new UnaCloudWSService();
       UnaCloudWS port=service.getUnaCloudWSPort();
       return port.turnOnVirtualCluster(username, password, templateID, size, ram, cores, hdSize, time);
+   }
+   public java.util.List<VirtualMachineExecutionWS> turnOnVirtualClusterCCGrid(int templateID, int size, int ram, int cores, int hdSize, int time,int used,int noUsed){
+      UnaCloudWSService service=new UnaCloudWSService();
+      UnaCloudWS port=service.getUnaCloudWSPort();
+      return port.turnOnVirtualClusterCCGrid(username, password, templateID, size, ram, cores, hdSize, time,used,noUsed);
    }
    public String turnOffVirtualMachine(java.lang.String virtualMachineExID){
       UnaCloudWSService service=new UnaCloudWSService();

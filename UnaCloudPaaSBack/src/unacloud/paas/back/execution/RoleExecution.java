@@ -39,12 +39,14 @@ public class RoleExecution{
       this.platformExecutionId=platformExecutionId;
       this.platformExecution=platformExecution;
    }
+   static int pos=1;
    public void startRole(){
       t=new Thread(){
          @Override
          public void run(){
             int size=(roleConfiguration.getCores()-1)/roleConfiguration.getCoresPerNode()+1;
-            List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster(roleConfiguration.getRoleConfig().getTemplateId(), size, roleConfiguration.getCoresPerNode());
+            /*List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster(roleConfiguration.getRoleConfig().getTemplateId(), size, roleConfiguration.getCoresPerNode());*/
+            List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster((pos++/2)==0?70:64, size, roleConfiguration.getCoresPerNode());
             for(VirtualMachineExecutionWS vme : vms){
                nodes.add(new NodeExecution(vme.getVirtualMachineName(), vme.getVirtualMachineExecutionIP(), vme.getVirtualMachineExecutionCode()));
             }
@@ -160,6 +162,7 @@ public class RoleExecution{
                }
 
             }
+            PaaSUtils.waitForFile();
             NodeExecution d=getNodes().get(new Random().nextInt(getNodes().size()));
             SSHCommandNoWait commandWait=new SSHCommandNoWait(d, "sh "+path+"/unacloudStart.sh", new ExecutionLog(platformExecutionId, "CommandRunner:"+getRoleName()), 1);
             commandWait.waitFor();

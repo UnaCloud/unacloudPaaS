@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for writeFileOnVirtualMachine complex type.
+ * <p>Clase Java para writeFileOnVirtualMachine complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="writeFileOnVirtualMachine">
@@ -46,7 +46,7 @@ public class WriteFileOnVirtualMachine {
     protected String content;
 
     /**
-     * Gets the value of the username property.
+     * Obtiene el valor de la propiedad username.
      * 
      * @return
      *     possible object is
@@ -58,7 +58,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Sets the value of the username property.
+     * Define el valor de la propiedad username.
      * 
      * @param value
      *     allowed object is
@@ -70,7 +70,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Gets the value of the password property.
+     * Obtiene el valor de la propiedad password.
      * 
      * @return
      *     possible object is
@@ -82,7 +82,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Sets the value of the password property.
+     * Define el valor de la propiedad password.
      * 
      * @param value
      *     allowed object is
@@ -94,7 +94,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionId property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionId.
      * 
      * @return
      *     possible object is
@@ -106,7 +106,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionId property.
+     * Define el valor de la propiedad virtualMachineExecutionId.
      * 
      * @param value
      *     allowed object is
@@ -118,7 +118,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Gets the value of the path property.
+     * Obtiene el valor de la propiedad path.
      * 
      * @return
      *     possible object is
@@ -130,7 +130,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Sets the value of the path property.
+     * Define el valor de la propiedad path.
      * 
      * @param value
      *     allowed object is
@@ -142,7 +142,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Gets the value of the content property.
+     * Obtiene el valor de la propiedad content.
      * 
      * @return
      *     possible object is
@@ -154,7 +154,7 @@ public class WriteFileOnVirtualMachine {
     }
 
     /**
-     * Sets the value of the content property.
+     * Define el valor de la propiedad content.
      * 
      * @param value
      *     allowed object is

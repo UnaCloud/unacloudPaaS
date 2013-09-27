@@ -34,6 +34,10 @@
 
 <xs:element name="turnOnVirtualCluster" type="tns:turnOnVirtualCluster"/>
 
+<xs:element name="turnOnVirtualClusterCCGrid" type="tns:turnOnVirtualClusterCCGrid"/>
+
+<xs:element name="turnOnVirtualClusterCCGridResponse" type="tns:turnOnVirtualClusterCCGridResponse"/>
+
 <xs:element name="turnOnVirtualClusterResponse" type="tns:turnOnVirtualClusterResponse"/>
 
 <xs:element name="writeFileOnVirtualMachine" type="tns:writeFileOnVirtualMachine"/>
@@ -91,6 +95,27 @@
 <xs:element name="virtualMachineExecutionStatusMessage" type="xs:string" minOccurs="0"/>
 <xs:element name="virtualMachineExecutionStop" type="xs:dateTime" minOccurs="0"/>
 <xs:element name="virtualMachineName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="turnOnVirtualClusterCCGrid">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="pass" type="xs:string" minOccurs="0"/>
+<xs:element name="templateID" type="xs:int"/>
+<xs:element name="size" type="xs:int"/>
+<xs:element name="ram" type="xs:int"/>
+<xs:element name="cores" type="xs:int"/>
+<xs:element name="hdSize" type="xs:int"/>
+<xs:element name="time" type="xs:int"/>
+<xs:element name="arg8" type="xs:int"/>
+<xs:element name="arg9" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="turnOnVirtualClusterCCGridResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:virtualMachineExecutionWS" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

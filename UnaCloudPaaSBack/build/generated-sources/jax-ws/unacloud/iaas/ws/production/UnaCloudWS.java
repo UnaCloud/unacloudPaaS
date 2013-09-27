@@ -183,6 +183,48 @@ public interface UnaCloudWS {
 
     /**
      * 
+     * @param time
+     * @param templateID
+     * @param username
+     * @param hdSize
+     * @param ram
+     * @param arg8
+     * @param cores
+     * @param arg9
+     * @param size
+     * @param pass
+     * @return
+     *     returns java.util.List<unacloud.iaas.ws.production.VirtualMachineExecutionWS>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "turnOnVirtualClusterCCGrid", targetNamespace = "http://wss.losandes.com/", className = "unacloud.iaas.ws.production.TurnOnVirtualClusterCCGrid")
+    @ResponseWrapper(localName = "turnOnVirtualClusterCCGridResponse", targetNamespace = "http://wss.losandes.com/", className = "unacloud.iaas.ws.production.TurnOnVirtualClusterCCGridResponse")
+    @Action(input = "http://wss.losandes.com/UnaCloudWS/turnOnVirtualClusterCCGridRequest", output = "http://wss.losandes.com/UnaCloudWS/turnOnVirtualClusterCCGridResponse")
+    public List<VirtualMachineExecutionWS> turnOnVirtualClusterCCGrid(
+        @WebParam(name = "username", targetNamespace = "")
+        String username,
+        @WebParam(name = "pass", targetNamespace = "")
+        String pass,
+        @WebParam(name = "templateID", targetNamespace = "")
+        int templateID,
+        @WebParam(name = "size", targetNamespace = "")
+        int size,
+        @WebParam(name = "ram", targetNamespace = "")
+        int ram,
+        @WebParam(name = "cores", targetNamespace = "")
+        int cores,
+        @WebParam(name = "hdSize", targetNamespace = "")
+        int hdSize,
+        @WebParam(name = "time", targetNamespace = "")
+        int time,
+        @WebParam(name = "arg8", targetNamespace = "")
+        int arg8,
+        @WebParam(name = "arg9", targetNamespace = "")
+        int arg9);
+
+    /**
+     * 
      * @param username
      * @param pass
      * @return

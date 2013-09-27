@@ -34,7 +34,7 @@ public class ClusterServices{
       });
       
       while(encendidas.size()<size){
-         List<VirtualMachineExecutionWS> aEncender=unacloudiaas.turnOnVirtualCluster(template, size, coresPerNode*1024, coresPerNode, 20,1024);
+         List<VirtualMachineExecutionWS> aEncender=unacloudiaas.turnOnVirtualClusterCCGrid(template, size, coresPerNode*1024, coresPerNode, 20,1024,0,2);
          if(aEncender.isEmpty()){
             return new ArrayList<>();
          }
