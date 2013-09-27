@@ -41,6 +41,12 @@
 <message name="writeFileOnVirtualMachineResponse">
 <part name="parameters" element="tns:writeFileOnVirtualMachineResponse"/>
 </message>
+<message name="turnOnVirtualClusterCCGrid">
+<part name="parameters" element="tns:turnOnVirtualClusterCCGrid"/>
+</message>
+<message name="turnOnVirtualClusterCCGridResponse">
+<part name="parameters" element="tns:turnOnVirtualClusterCCGridResponse"/>
+</message>
 <message name="getTemplateLists">
 <part name="parameters" element="tns:getTemplateLists"/>
 </message>
@@ -89,6 +95,10 @@
 <operation name="writeFileOnVirtualMachine">
 <input wsam:Action="http://wss.losandes.com/UnaCloudWS/writeFileOnVirtualMachineRequest" message="tns:writeFileOnVirtualMachine"/>
 <output wsam:Action="http://wss.losandes.com/UnaCloudWS/writeFileOnVirtualMachineResponse" message="tns:writeFileOnVirtualMachineResponse"/>
+</operation>
+<operation name="turnOnVirtualClusterCCGrid">
+<input wsam:Action="http://wss.losandes.com/UnaCloudWS/turnOnVirtualClusterCCGridRequest" message="tns:turnOnVirtualClusterCCGrid"/>
+<output wsam:Action="http://wss.losandes.com/UnaCloudWS/turnOnVirtualClusterCCGridResponse" message="tns:turnOnVirtualClusterCCGridResponse"/>
 </operation>
 <operation name="getTemplateLists">
 <input wsam:Action="http://wss.losandes.com/UnaCloudWS/getTemplateListsRequest" message="tns:getTemplateLists"/>
@@ -156,6 +166,15 @@
 </output>
 </operation>
 <operation name="writeFileOnVirtualMachine">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="turnOnVirtualClusterCCGrid">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
