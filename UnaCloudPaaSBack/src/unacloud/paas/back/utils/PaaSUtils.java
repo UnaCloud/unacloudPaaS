@@ -1,6 +1,5 @@
 package unacloud.paas.back.utils;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -37,7 +36,7 @@ public class PaaSUtils{
     private static int contador=0;
     private final static Object sincronizador = new Object();
     public static void waitForFile(){
-       synchronized(sincronizador){
+       /*synchronized(sincronizador){
           if(contador==1){
              contador=0;
              sincronizador.notifyAll();
@@ -49,6 +48,6 @@ public class PaaSUtils{
                 Logger.getLogger(PaaSUtils.class.getName()).log(Level.SEVERE, null, ex);
              }
           }
-       }
+       }*/
     }
 }

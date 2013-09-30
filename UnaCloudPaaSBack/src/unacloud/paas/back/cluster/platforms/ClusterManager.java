@@ -47,10 +47,14 @@ public class ClusterManager{
             FolderManager.createPlatformFolder(platformExecutionId);
             PlatformExecution execution=new PlatformExecution(platformExecutionId, platformExecution);
             PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Starting platform..."));
+            Logger.getLogger("PaaS").log(Level.INFO,"StartingPlatform");
             execution.startPlatform();
+            Logger.getLogger("PaaS").log(Level.INFO,"StartedPlatform");
             PlatformExecutionManager.addRoleExecution(platformExecutionId, execution.getRoles());
             PlatformExecutionManager.updatePlatformExecutionState(platformExecutionId, ExecutionState.STARTING.getId());
+            Logger.getLogger("PaaS").log(Level.INFO,"StartedPlatform:1");
             PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Configuring platform..."));
+            Logger.getLogger("PaaS").log(Level.INFO,"Configuring platform...");
             try{
                if(platformExecution.getPlatform().getId()==1){
                   try(PrintWriter pw=new PrintWriter(new File(PLATFORMS_FOLDER, "/"+Long.toHexString(platformExecutionId)+"/machinesFile"))){

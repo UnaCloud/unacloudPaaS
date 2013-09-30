@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import unacloud.paas.back.execution.PuppetModuleInstance;
@@ -93,29 +94,31 @@ public class PuppetMaster{
       for(RoleExecution role : platform.getRoles()){
          role.executeCommandOnRole("puppet agent --test",5000);
       }
+      PaaSUtils.sleep(10000);
       String nodeList="";
       for(int e=0;e<nodeNames.size();e++){
-         for(String d : nodeNames){
-            nodeList+=" "+d;
-         }
-         if(e>0&&e%20==0){
-            new ProcessManager(null, "puppet cert sign"+nodeList).waitFor();
+         nodeList+=" "+nodeNames.get(e);
+         if(e>0&&e%10==0){
+            new ProcessManager(new ExecutionLog(platform.getPlatformExecutionId(),"puppetMaster"), "puppet cert sign"+nodeList).waitFor();
             nodeList="";
          }
       }
-      if(!nodeList.isEmpty())new ProcessManager(null, "puppet cert sign"+nodeList).waitFor();
+      if(!nodeList.isEmpty())new ProcessManager(new ExecutionLog(platform.getPlatformExecutionId(),"puppetMaster"), "puppet cert sign"+nodeList).waitFor();
+      Logger.getLogger("PaaS").log(Level.INFO,"puppetMaster "+nodeList);
       for(RoleExecution role : platform.getRoles()){
-         role.executeCommandOnRole("puppet agent --test",10000);
+         role.executeCommandOnRole("puppet agent --test",5000);
       }
    }
    public static void stopPuppetCluster(List<NodeExecution> cluster){
       String nodeList="";
-      {
-         for(NodeExecution d : cluster){
-            nodeList+=" "+d.getHostname();
+      for(int e=0;e<cluster.size();e++){
+         nodeList+=" "+cluster.get(e).getHostname();
+         if(e>0&&e%10==0){
+            new ProcessManager(null, "puppet cert clean"+nodeList).waitFor();
+            nodeList="";
          }
       }
-      new ProcessManager(null, "puppet cert clean"+nodeList).waitFor();
+      if(!nodeList.isEmpty())new ProcessManager(null, "puppet cert clean"+nodeList).waitFor();
    }
    private static String[] masterRsaId;
    public static String[] getMasterRSAId(){

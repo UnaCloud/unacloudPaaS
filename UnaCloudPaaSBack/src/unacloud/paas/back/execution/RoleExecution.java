@@ -41,18 +41,15 @@ public class RoleExecution{
    }
    static int pos=1;
    public void startRole(){
-      t=new Thread(){
-         @Override
-         public void run(){
-            int size=(roleConfiguration.getCores()-1)/roleConfiguration.getCoresPerNode()+1;
-            /*List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster(roleConfiguration.getRoleConfig().getTemplateId(), size, roleConfiguration.getCoresPerNode());*/
-            List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster((pos++%2)==0?70:64, size, roleConfiguration.getCoresPerNode());
-            for(VirtualMachineExecutionWS vme : vms){
-               nodes.add(new NodeExecution(vme.getVirtualMachineName(), vme.getVirtualMachineExecutionIP(), vme.getVirtualMachineExecutionCode()));
-            }
-         }
-      };
-      t.start();
+      Logger.getLogger("PaaS").log(Level.INFO,"StartingRole");
+      int size=(roleConfiguration.getCores()-1)/roleConfiguration.getCoresPerNode()+1;
+      /*List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster(roleConfiguration.getRoleConfig().getTemplateId(), size, roleConfiguration.getCoresPerNode());*/
+      List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster((pos++%2)==0?70:64, size, roleConfiguration.getCoresPerNode());
+      Logger.getLogger("PaaS").log(Level.INFO,"Machines Started");
+      for(VirtualMachineExecutionWS vme : vms){
+         nodes.add(new NodeExecution(vme.getVirtualMachineName(), vme.getVirtualMachineExecutionIP(), vme.getVirtualMachineExecutionCode()));
+      }
+      Logger.getLogger("PaaS").log(Level.INFO,"RoleStarted");
    }
    public void configureRole(){
       for(NodeExecution d : nodes){

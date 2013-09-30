@@ -24,7 +24,6 @@ public class ClusterServices{
    }
    static UnaCloudOperations unacloudiaas=new UnaCloudOperations("ga.sotelo69", "asdasdasd");
    public static List<VirtualMachineExecutionWS> startCluster(final int template, final int size, final int coresPerNode){
-      
       final Set<String> executionIds=new TreeSet<>();
       final Set<VirtualMachineExecutionWS> encendidas=new TreeSet<>(new Comparator<VirtualMachineExecutionWS>(){
          @Override
@@ -32,9 +31,9 @@ public class ClusterServices{
             return o1.getVirtualMachineExecutionCode().compareTo(o2.getVirtualMachineExecutionCode());
          }
       });
-      
       while(encendidas.size()<size){
          List<VirtualMachineExecutionWS> aEncender=unacloudiaas.turnOnVirtualClusterCCGrid(template, size, coresPerNode*1024, coresPerNode, 20,1024,0,2);
+         Logger.getLogger("PaaS").log(Level.INFO,"Levantando "+aEncender.size());
          if(aEncender.isEmpty()){
             return new ArrayList<>();
          }
@@ -45,7 +44,7 @@ public class ClusterServices{
          for(int e=0; e<4; e++){
             PaaSUtils.sleep(30000);
             for(VirtualMachineExecutionWS vme : unacloudiaas.getVirtualMachineExecutions(template)){
-               if(executionIds.contains(vme.getVirtualMachineExecutionCode())&&vme.getVirtualMachineExecutionStatus()==1){
+               if(vme.getVirtualMachineExecutionStatus()==1&&executionIds.contains(vme.getVirtualMachineExecutionCode())){
                   executionIds.remove(vme.getVirtualMachineExecutionCode());
                   encendidas.add(vme);
                }
@@ -53,8 +52,7 @@ public class ClusterServices{
             if(encendidas.size()>=size)break;
          }
       }
-      System.out.println("startCluster "+size+" "+template+" "+coresPerNode);
-      for(VirtualMachineExecutionWS vm:encendidas)System.out.println("  "+vm);
+      Logger.getLogger("PaaS").log(Level.INFO,"startedCluster "+size+" "+template+" "+coresPerNode);
       return new ArrayList<>(encendidas);
    }
    public static void waitForSSH(List<NodeExecution> cluster){

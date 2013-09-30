@@ -102,7 +102,6 @@ public class PlatformExecution{
    public void startPlatform(){
       for(RoleExecution role : roles){
          role.startRole();
-         role.waitForRole();
       }
    }
    public void executeCommands(){
