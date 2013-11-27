@@ -9,9 +9,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for virtualMachineExecutionWS complex type.
+ * <p>Clase Java para virtualMachineExecutionWS complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="virtualMachineExecutionWS">
@@ -74,7 +74,7 @@ public class VirtualMachineExecutionWS {
     protected String virtualMachineName;
 
     /**
-     * Gets the value of the systemUser property.
+     * Obtiene el valor de la propiedad systemUser.
      * 
      * @return
      *     possible object is
@@ -86,7 +86,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the systemUser property.
+     * Define el valor de la propiedad systemUser.
      * 
      * @param value
      *     allowed object is
@@ -98,7 +98,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the template property.
+     * Obtiene el valor de la propiedad template.
      * 
      * @return
      *     possible object is
@@ -110,7 +110,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the template property.
+     * Define el valor de la propiedad template.
      * 
      * @param value
      *     allowed object is
@@ -122,7 +122,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachine property.
+     * Obtiene el valor de la propiedad virtualMachine.
      * 
      * @return
      *     possible object is
@@ -134,7 +134,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachine property.
+     * Define el valor de la propiedad virtualMachine.
      * 
      * @param value
      *     allowed object is
@@ -146,7 +146,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionCode property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionCode.
      * 
      * @return
      *     possible object is
@@ -158,7 +158,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionCode property.
+     * Define el valor de la propiedad virtualMachineExecutionCode.
      * 
      * @param value
      *     allowed object is
@@ -170,7 +170,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionCores property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionCores.
      * 
      */
     public int getVirtualMachineExecutionCores() {
@@ -178,7 +178,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionCores property.
+     * Define el valor de la propiedad virtualMachineExecutionCores.
      * 
      */
     public void setVirtualMachineExecutionCores(int value) {
@@ -186,7 +186,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionHardDisk property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionHardDisk.
      * 
      */
     public long getVirtualMachineExecutionHardDisk() {
@@ -194,7 +194,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionHardDisk property.
+     * Define el valor de la propiedad virtualMachineExecutionHardDisk.
      * 
      */
     public void setVirtualMachineExecutionHardDisk(long value) {
@@ -202,7 +202,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionIP property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionIP.
      * 
      * @return
      *     possible object is
@@ -214,7 +214,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionIP property.
+     * Define el valor de la propiedad virtualMachineExecutionIP.
      * 
      * @param value
      *     allowed object is
@@ -226,7 +226,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionRAMMemory property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionRAMMemory.
      * 
      */
     public int getVirtualMachineExecutionRAMMemory() {
@@ -234,7 +234,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionRAMMemory property.
+     * Define el valor de la propiedad virtualMachineExecutionRAMMemory.
      * 
      */
     public void setVirtualMachineExecutionRAMMemory(int value) {
@@ -242,7 +242,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionStart property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionStart.
      * 
      * @return
      *     possible object is
@@ -254,7 +254,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionStart property.
+     * Define el valor de la propiedad virtualMachineExecutionStart.
      * 
      * @param value
      *     allowed object is
@@ -266,7 +266,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionStatus property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionStatus.
      * 
      */
     public int getVirtualMachineExecutionStatus() {
@@ -274,7 +274,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionStatus property.
+     * Define el valor de la propiedad virtualMachineExecutionStatus.
      * 
      */
     public void setVirtualMachineExecutionStatus(int value) {
@@ -282,7 +282,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionStatusMessage property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionStatusMessage.
      * 
      * @return
      *     possible object is
@@ -294,7 +294,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionStatusMessage property.
+     * Define el valor de la propiedad virtualMachineExecutionStatusMessage.
      * 
      * @param value
      *     allowed object is
@@ -306,7 +306,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineExecutionStop property.
+     * Obtiene el valor de la propiedad virtualMachineExecutionStop.
      * 
      * @return
      *     possible object is
@@ -318,7 +318,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineExecutionStop property.
+     * Define el valor de la propiedad virtualMachineExecutionStop.
      * 
      * @param value
      *     allowed object is
@@ -330,7 +330,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Gets the value of the virtualMachineName property.
+     * Obtiene el valor de la propiedad virtualMachineName.
      * 
      * @return
      *     possible object is
@@ -342,7 +342,7 @@ public class VirtualMachineExecutionWS {
     }
 
     /**
-     * Sets the value of the virtualMachineName property.
+     * Define el valor de la propiedad virtualMachineName.
      * 
      * @param value
      *     allowed object is

@@ -32,7 +32,7 @@ public class ClusterServices{
          }
       });
       while(encendidas.size()<size){
-         List<VirtualMachineExecutionWS> aEncender=unacloudiaas.turnOnVirtualClusterCCGrid(template, size, coresPerNode*1024, coresPerNode, 20,1024,0,2);
+         List<VirtualMachineExecutionWS> aEncender=unacloudiaas.turnOnVirtualClusterCCGrid(template,size-encendidas.size(), coresPerNode*1024, coresPerNode, 20,1024,2,0);
          Logger.getLogger("PaaS").log(Level.INFO,"Levantando "+aEncender.size());
          if(aEncender.isEmpty()){
             return new ArrayList<>();
@@ -40,16 +40,17 @@ public class ClusterServices{
          for(VirtualMachineExecutionWS vme : aEncender){
             executionIds.add(vme.getVirtualMachineExecutionCode());
          }
-         ciclo:
          for(int e=0; e<4; e++){
             PaaSUtils.sleep(30000);
             for(VirtualMachineExecutionWS vme : unacloudiaas.getVirtualMachineExecutions(template)){
                if(vme.getVirtualMachineExecutionStatus()==1&&executionIds.contains(vme.getVirtualMachineExecutionCode())){
                   executionIds.remove(vme.getVirtualMachineExecutionCode());
                   encendidas.add(vme);
+               }else if(vme.getVirtualMachineExecutionStatus()==6){
+                   executionIds.remove(vme.getVirtualMachineExecutionCode());
                }
             }
-            if(encendidas.size()>=size)break;
+            if(encendidas.size()>=size||executionIds.isEmpty())break;
          }
       }
       Logger.getLogger("PaaS").log(Level.INFO,"startedCluster "+size+" "+template+" "+coresPerNode);

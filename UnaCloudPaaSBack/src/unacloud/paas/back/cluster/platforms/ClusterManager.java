@@ -29,7 +29,7 @@ import unacloud.paas.data.execution.FileDescriptionEntity;
 import unacloud.paas.data.execution.PlatformExecutionEntity;
 import unacloud.paas.data.managers.PlatformExecutionManager;
 public class ClusterManager{
-   public static void createCluster(final PlatformExecutionEntity platformExecution, final String username, final List<FileDescriptionEntity> files){
+   public static void createCluster(final PlatformExecutionEntity platformExecution, final String username, final List<FileDescriptionEntity> files,boolean waitParallel){
       if(platformExecution==null){
          return;
       }
@@ -37,9 +37,9 @@ public class ClusterManager{
          return;
       }
       Main.start();
-      startCluster(platformExecution, files);
+      startCluster(platformExecution, files,waitParallel);
    }
-   public static void startCluster(final PlatformExecutionEntity platformExecution, final List<FileDescriptionEntity> files){
+   public static void startCluster(final PlatformExecutionEntity platformExecution, final List<FileDescriptionEntity> files,final boolean WaitParallel){
       ThreadUtils.pool.submit(new Runnable(){
          @Override
          public void run(){
@@ -49,11 +49,12 @@ public class ClusterManager{
             PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Starting platform..."));
             Logger.getLogger("PaaS").log(Level.INFO,"StartingPlatform");
             execution.startPlatform();
-            Logger.getLogger("PaaS").log(Level.INFO,"StartedPlatform");
+            Logger.getLogger("PaaS").log(Level.INFO,"StartedPlatform ");
             PlatformExecutionManager.addRoleExecution(platformExecutionId, execution.getRoles());
             PlatformExecutionManager.updatePlatformExecutionState(platformExecutionId, ExecutionState.STARTING.getId());
             Logger.getLogger("PaaS").log(Level.INFO,"StartedPlatform:1");
-            PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Configuring platform..."));
+            int tot=0;for(RoleExecution role:execution.getRoles())tot+=role.getNodes().size();
+            PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Configuring platform... "+tot));
             Logger.getLogger("PaaS").log(Level.INFO,"Configuring platform...");
             try{
                if(platformExecution.getPlatform().getId()==1){
@@ -86,7 +87,7 @@ public class ClusterManager{
                }
                execution.configurePlatform();
                PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Executing commands..."));
-               execution.executeCommands();
+               execution.executeCommands(WaitParallel);
                PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Executing commands 2..."));
                PlatformExecutionManager.updatePlatformExecutionState(platformExecutionId, ExecutionState.RUNNING.getId());
                PlatformExecutionManager.storeLog(new ExecutionLog(platformExecutionId, "platform", "Running..."));

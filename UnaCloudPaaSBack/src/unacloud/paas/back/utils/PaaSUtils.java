@@ -36,7 +36,7 @@ public class PaaSUtils{
     private static int contador=0;
     private final static Object sincronizador = new Object();
     public static void waitForFile(){
-       /*synchronized(sincronizador){
+       synchronized(sincronizador){
           if(contador==1){
              contador=0;
              sincronizador.notifyAll();
@@ -45,9 +45,9 @@ public class PaaSUtils{
              try{
                 sincronizador.wait();
              }catch(InterruptedException ex){
-                Logger.getLogger(PaaSUtils.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(PaaSUtils.class.getName()).log(Level.SEVERE, null, ex);
              }
           }
-       }*/
+       }
     }
 }

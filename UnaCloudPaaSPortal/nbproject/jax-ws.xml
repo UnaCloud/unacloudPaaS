@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
-  <services/>
+  <services>
+    <service name="PaaSWebService">
+      <implementation-class>unacloud.paas.web.ws.webservices.PaaSWebService</implementation-class>
+    </service>
+  </services>
   <clients>
   </clients>
 </jax-ws>

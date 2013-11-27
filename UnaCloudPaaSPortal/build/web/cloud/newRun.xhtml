@@ -18,8 +18,7 @@
                     </c:forEach>
                 </h:panelGrid>
             </h:panelGroup>
-            <h:panelGrid columnClasses="alignTop,alignTop" columns="2" rendered="#{newRunBean.toRun!=null}" style="min-width: 500px;">
-                <p:commandButton value="Back" action="#{newRunBean.selectPlatform(-1)}" update="formRun"/>
+            <h:panelGrid columnClasses="alignTop,alignTop" columns="1" rendered="#{newRunBean.toRun!=null}" style="min-width: 500px;">
                 <h:panelGroup>
                     <h:form id="mainForm">
                         <h:panelGrid columns="3" style="width: 100%;" columnClasses="alignTop,alignRightTop,alignRightTop" cellspacing="0" cellpadding="0">

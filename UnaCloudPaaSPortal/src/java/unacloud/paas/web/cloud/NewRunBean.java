@@ -20,7 +20,6 @@ import org.primefaces.event.FileUploadEvent;
 import unacloud.paas.back.cluster.platforms.ClusterManager;
 import unacloud.paas.back.user.FolderManager;
 import unacloud.paas.data.entities.MainCommand;
-import unacloud.paas.data.entities.PlatformRole;
 import unacloud.paas.data.entities.PuppetModule;
 import unacloud.paas.data.entities.PuppetModuleUsage;
 import unacloud.paas.data.entities.enums.ResourceType;
@@ -70,7 +69,7 @@ public class NewRunBean implements Serializable{
             }
          }
       }
-      ClusterManager.createCluster(toRun, FacesContext.getCurrentInstance().getExternalContext().getRemoteUser(), files);
+      ClusterManager.createCluster(toRun, FacesContext.getCurrentInstance().getExternalContext().getRemoteUser(), files,false);
       return "running";
    }
    public PuppetModule getPuppetModule(){

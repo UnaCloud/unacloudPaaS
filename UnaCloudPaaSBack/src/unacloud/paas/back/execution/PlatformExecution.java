@@ -104,9 +104,9 @@ public class PlatformExecution{
          role.startRole();
       }
    }
-   public void executeCommands(){
+   public void executeCommands(final boolean WaitParallel){
       for(RoleExecution role : roles){
-         role.executeCommands();
+         role.executeCommands(WaitParallel);
       }
    }
    public List<RoleExecution> getRoles(){

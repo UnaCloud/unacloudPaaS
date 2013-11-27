@@ -88,7 +88,7 @@ public class PuppetMaster{
       }
       for(RoleExecution role : platform.getRoles()){
          for(NodeExecution d : role.getNodes()){
-            new SSHCommand(d, "echo \"certname="+d.getHostname()+"\" >> /etc/puppet/puppet.conf", new ExecutionLog(platform.getPlatformExecutionId(), "node:"+d.getHostname())).waitFor();
+            new SSHCommand(d, "echo \"certname="+d.getHostname().toLowerCase()+"\" >> /etc/puppet/puppet.conf", new ExecutionLog(platform.getPlatformExecutionId(), "node:"+d.getHostname())).waitFor();
          }
       }
       for(RoleExecution role : platform.getRoles()){
@@ -97,7 +97,7 @@ public class PuppetMaster{
       PaaSUtils.sleep(10000);
       String nodeList="";
       for(int e=0;e<nodeNames.size();e++){
-         nodeList+=" "+nodeNames.get(e);
+         nodeList+=" "+(nodeNames.get(e).toLowerCase());
          if(e>0&&e%10==0){
             new ProcessManager(new ExecutionLog(platform.getPlatformExecutionId(),"puppetMaster"), "puppet cert sign"+nodeList).waitFor();
             nodeList="";

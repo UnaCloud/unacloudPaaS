@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getTotalVirtualMachines complex type.
+ * <p>Clase Java para getTotalVirtualMachines complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="getTotalVirtualMachines">
@@ -49,7 +49,7 @@ public class GetTotalVirtualMachines {
     protected String pass;
 
     /**
-     * Gets the value of the machineDisk property.
+     * Obtiene el valor de la propiedad machineDisk.
      * 
      */
     public int getMachineDisk() {
@@ -57,7 +57,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Sets the value of the machineDisk property.
+     * Define el valor de la propiedad machineDisk.
      * 
      */
     public void setMachineDisk(int value) {
@@ -65,7 +65,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Gets the value of the machineCores property.
+     * Obtiene el valor de la propiedad machineCores.
      * 
      */
     public int getMachineCores() {
@@ -73,7 +73,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Sets the value of the machineCores property.
+     * Define el valor de la propiedad machineCores.
      * 
      */
     public void setMachineCores(int value) {
@@ -81,7 +81,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Gets the value of the machineRam property.
+     * Obtiene el valor de la propiedad machineRam.
      * 
      */
     public int getMachineRam() {
@@ -89,7 +89,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Sets the value of the machineRam property.
+     * Define el valor de la propiedad machineRam.
      * 
      */
     public void setMachineRam(int value) {
@@ -97,7 +97,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Gets the value of the templateCode property.
+     * Obtiene el valor de la propiedad templateCode.
      * 
      */
     public int getTemplateCode() {
@@ -105,7 +105,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Sets the value of the templateCode property.
+     * Define el valor de la propiedad templateCode.
      * 
      */
     public void setTemplateCode(int value) {
@@ -113,7 +113,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Gets the value of the username property.
+     * Obtiene el valor de la propiedad username.
      * 
      * @return
      *     possible object is
@@ -125,7 +125,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Sets the value of the username property.
+     * Define el valor de la propiedad username.
      * 
      * @param value
      *     allowed object is
@@ -137,7 +137,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Gets the value of the pass property.
+     * Obtiene el valor de la propiedad pass.
      * 
      * @return
      *     possible object is
@@ -149,7 +149,7 @@ public class GetTotalVirtualMachines {
     }
 
     /**
-     * Sets the value of the pass property.
+     * Define el valor de la propiedad pass.
      * 
      * @param value
      *     allowed object is
