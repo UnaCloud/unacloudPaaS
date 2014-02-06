@@ -14,10 +14,9 @@ import unacloud.paas.back.utils.PaaSUtils;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import unacloud.iaas.ws.UnaCloudOperations;
-import unacloud.iaas.ws.production.VirtualMachineExecutionWS;
 import unacloud.paas.back.execution.PlatformExecution;
 import unacloud.paas.back.execution.RoleExecution;
+import unacloudws.responses.VirtualMachineExecutionWS;
 public class ClusterServices{
    static{
       new File("./utils").mkdir();
