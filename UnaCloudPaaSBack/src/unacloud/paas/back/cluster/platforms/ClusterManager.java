@@ -109,7 +109,7 @@ public class ClusterManager{
       }
       if(!nodes.isEmpty()){
          PuppetMaster.stopPuppetCluster(nodes);
-         ClusterServices.stopCluster(nodes);
+         ClusterServices.stopCluster(1);
       }
    }
 }

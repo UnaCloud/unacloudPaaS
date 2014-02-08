@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import unacloud.iaas.ws.production.VirtualMachineExecutionWS;
 import unacloud.paas.back.iaasservices.ClusterServices;
 import unacloud.paas.back.dsl.Parser;
 import unacloud.paas.back.sshutils.SCP;
@@ -25,6 +24,7 @@ import unacloud.paas.data.entities.enums.ResourceType;
 import unacloud.paas.data.execution.CommandExecutionEntity;
 import unacloud.paas.data.execution.RoleExecutionEntity;
 import unacloud.paas.data.managers.PlatformExecutionManager;
+import unacloudws.responses.VirtualMachineExecutionWS;
 
 /**
  *
@@ -54,7 +54,7 @@ public class RoleExecution {
         List<VirtualMachineExecutionWS> vms=ClusterServices.startCluster(69/*roleConfiguration.getRoleConfig().getTemplateId()*/, size, roleConfiguration.getCoresPerNode());
         Logger.getLogger("PaaS").log(Level.INFO, "Machines Started");
         for (VirtualMachineExecutionWS vme : vms) {
-            nodes.add(new NodeExecution(vme.getVirtualMachineName(), vme.getVirtualMachineExecutionIP(), vme.getVirtualMachineExecutionCode()));
+            nodes.add(new NodeExecution(vme.getVirtualMachineName(), vme.getVirtualMachineExecutionIP(), ""+vme.getId()));
         }
         Logger.getLogger("PaaS").log(Level.INFO, "RoleStarted");
     }
