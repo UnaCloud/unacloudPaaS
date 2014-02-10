@@ -43,10 +43,6 @@ import unacloud.paas.data.execution.FileDescriptionEntity;
 import unacloud.paas.failrecovery.PlatformSucessManager;
 import unacloudws.responses.VirtualMachineExecutionWS;
 
-/**
- *
- * @author G
- */
 @Stateless
 @LocalBean
 public class ClusterManagerBean {

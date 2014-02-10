@@ -7,7 +7,6 @@
 package unacloud.paas.back.database.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,10 +46,12 @@ import unacloudws.requests.VirtualImageRequest;
     @NamedQuery(name = "PlatformExecution.findByEternal", query = "SELECT p FROM PlatformExecution p WHERE p.eternal = TRUE AND p.status = :state")})
 public class PlatformExecution implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
+    
     private Long id;
     @Size(max = 45)
     @Column(length = 45)
@@ -71,12 +72,9 @@ public class PlatformExecution implements Serializable {
     @ManyToOne(optional = false)
     private Platform platform;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "platformExecutionid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "platformExecution")
     private List<RolExecution> rolExecution;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "platformExecutionid")
-    private List<ExecutionLog> executionLog;
-
     public PlatformExecution() {
     }
 
@@ -147,15 +145,6 @@ public class PlatformExecution implements Serializable {
 
     public void setRolExecution(List<RolExecution> rolExecution) {
         this.rolExecution = rolExecution;
-    }
-
-    @XmlTransient
-    public List<ExecutionLog> getExecutionLog() {
-        return executionLog;
-    }
-
-    public void setExecutionLog(List<ExecutionLog> executionLog) {
-        this.executionLog = executionLog;
     }
 
     @Transient

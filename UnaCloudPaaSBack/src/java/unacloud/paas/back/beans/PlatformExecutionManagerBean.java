@@ -100,8 +100,9 @@ public class PlatformExecutionManagerBean {
     }
 
     public List<ExecutionLog> getPlatformLog(long platformExecutionId) {
-        PlatformExecution platformExecution = entityManager.find(PlatformExecution.class, platformExecutionId);
-        return platformExecution.getExecutionLog();
+        TypedQuery<ExecutionLog> query=entityManager.createNamedQuery("ExecutionLog.findByPlatform", ExecutionLog.class);
+        query.setParameter("platformExecutionId", platformExecutionId);
+        return query.getResultList();
     }
 
     private static String padd(long l) {

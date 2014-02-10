@@ -51,9 +51,12 @@ public class Command implements Serializable {
     @Column(length = 45)
     private String runningUser;
     
-    @JoinColumn(name = "resourceType_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
     private ResourceType type;
+    
+    private boolean mainCommand;
+    
+    @ManyToOne
+    private RolExecution rolExecution;
     
     public Command() {
     }
@@ -101,4 +104,14 @@ public class Command implements Serializable {
     public void setType(ResourceType type) {
         this.type = type;
     }
+
+    public boolean getMainCommand() {
+        return mainCommand;
+    }
+
+    public void setMainCommand(boolean mainCommand) {
+        this.mainCommand = mainCommand;
+    }
+    
+    
 }

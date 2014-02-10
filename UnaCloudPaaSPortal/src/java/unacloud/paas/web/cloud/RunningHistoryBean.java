@@ -4,13 +4,14 @@
  */
 package unacloud.paas.web.cloud;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.annotation.ManagedBean;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import org.primefaces.context.RequestContext;
 import unacloud.paas.back.Main;
-import unacloud.paas.data.execution.PlatformExecutionEntity;
-import unacloud.paas.data.managers.PlatformExecutionManager;
+import unacloud.paas.back.beans.PlatformExecutionManagerBean;
+import unacloud.paas.back.database.entities.PlatformExecution;
 /**
  *
  * @author G
@@ -18,18 +19,20 @@ import unacloud.paas.data.managers.PlatformExecutionManager;
 @ManagedBean
 @ViewScoped
 public class RunningHistoryBean{
-   List<PlatformExecutionEntity> list;
-   long platformToDelete;
+    List<PlatformExecution> list;
+    long platformToDelete;
+    @EJB
+    PlatformExecutionManagerBean platformExecutionManagerBean;
    public RunningHistoryBean(){
       Main.start();
    }
-   public List<PlatformExecutionEntity> getList(){
+   public List<PlatformExecution> getList(){
       if(list==null){
-         list=PlatformExecutionManager.getPlatformExecutionList(FacesContext.getCurrentInstance().getExternalContext().getRemoteUser());
+         list=platformExecutionManagerBean.getPlatformExecutionList(FacesContext.getCurrentInstance().getExternalContext().getRemoteUser());
       }
       return list;
    }
-   public void setList(List<PlatformExecutionEntity> list){
+   public void setList(List<PlatformExecution> list){
       this.list=list;
    }
    public String toDeletePlatform(long id){
@@ -37,7 +40,7 @@ public class RunningHistoryBean{
       return null;
    }
    public String deletePlatform(){
-      PlatformExecutionManager.deletePlatformExecution(platformToDelete);
+      platformExecutionManagerBean.deletePlatformExecution(platformToDelete);
       platformToDelete=0;
       RequestContext.getCurrentInstance().execute("confirmDelete.hide();");
       return "runningHistory";

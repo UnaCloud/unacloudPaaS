@@ -4,10 +4,11 @@
  */
 package unacloud.paas.web.admin;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import unacloud.paas.data.entities.User;
-import unacloud.paas.data.managers.UserManager;
+import javax.annotation.ManagedBean;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import unacloud.paas.back.beans.UserManagerBean;
+import unacloud.paas.back.database.entities.User;
 /**
  *
  * @author G
@@ -15,12 +16,14 @@ import unacloud.paas.data.managers.UserManager;
 @ManagedBean
 @RequestScoped
 public class UserAdminBean{
+    @EJB
+    private UserManagerBean userManagerBean;
     List<User> userList;
     public UserAdminBean(){
     }
     public List<User> getUserList(){
         if(userList==null){
-            userList=UserManager.getUserList();
+            userList=userManagerBean.getUserList();
         }
         return userList;
     }

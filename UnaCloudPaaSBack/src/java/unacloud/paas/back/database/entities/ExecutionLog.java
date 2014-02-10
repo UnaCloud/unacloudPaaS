@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ExecutionLog.findAll", query = "SELECT e FROM ExecutionLog e"),
     @NamedQuery(name = "ExecutionLog.findByIdnodeLog", query = "SELECT e FROM ExecutionLog e WHERE e.idnodeLog = :idnodeLog"),
-    
+    @NamedQuery(name = "ExecutionLog.findByPlatform", query = "SELECT e FROM ExecutionLog e WHERE e.platformExecutionId = :platformExecutionId"),
     @NamedQuery(name = "ExecutionLog.findByComponent", query = "SELECT e FROM ExecutionLog e WHERE e.component = :component")})
 public class ExecutionLog implements Serializable {
     private static final long serialVersionUID = 1L;

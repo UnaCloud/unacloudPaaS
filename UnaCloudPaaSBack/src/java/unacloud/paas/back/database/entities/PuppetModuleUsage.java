@@ -49,14 +49,14 @@ public class PuppetModuleUsage implements Serializable {
     @ManyToOne(optional = false)
     private PuppetModule puppetModule;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "puppetModule")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "puppetModuleUsage")
     private List<PuppetParamValue> puppetParamValue;
     
     public PuppetModuleUsage() {
     }
 
-    public PuppetModuleUsage(Integer id) {
-        this.id = id;
+    public PuppetModuleUsage(PuppetModule puppetModule) {
+        this.puppetModule = puppetModule;
     }
 
     public Integer getId() {

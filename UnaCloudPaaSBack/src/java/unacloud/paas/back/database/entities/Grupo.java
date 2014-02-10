@@ -31,15 +31,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Grupo.findByGroupname", query = "SELECT g FROM Grupo g WHERE g.groupname = :groupname")})
 public class Grupo implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
     @Column(nullable = false, length = 10)
     private String groupname;
-    @ManyToMany(mappedBy = "grupoCollection")
-    private Collection<User> userCollection;
-
+    
     public Grupo() {
     }
 
@@ -55,38 +54,4 @@ public class Grupo implements Serializable {
         this.groupname = groupname;
     }
 
-    @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
-    }
-
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (groupname != null ? groupname.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Grupo)) {
-            return false;
-        }
-        Grupo other = (Grupo) object;
-        if ((this.groupname == null && other.groupname != null) || (this.groupname != null && !this.groupname.equals(other.groupname))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "unacloud.paas.back.database.entities.Grupo[ groupname=" + groupname + " ]";
-    }
-    
 }

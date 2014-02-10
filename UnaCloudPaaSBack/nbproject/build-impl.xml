@@ -819,16 +819,36 @@ exists or setup the property manually. For example like this:
     <target depends="compile,-library-inclusion-in-archive-weblogic,-library-inclusion-in-archive-by-user" name="library-inclusion-in-archive"/>
     <target if="is.jars.in.ejbjar" name="-library-inclusion-in-archive-by-user">
         <copyfiles files="${file.reference.UnaCloudIaaSAPI.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.jackson-annotations-2.2.3.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.jackson-core-2.2.3.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.jackson-databind-2.2.3.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.jersey-bundle-1.17.1.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.jersey-json-1.18.jar}" todir="${build.classes.dir}"/>
     </target>
     <target if="is.server.weblogic" name="-library-inclusion-in-archive-weblogic">
         <basename file="${file.reference.UnaCloudIaaSAPI.jar}" property="manifest.file.reference.UnaCloudIaaSAPI.jar"/>
+        <basename file="${file.reference.jackson-annotations-2.2.3.jar}" property="manifest.file.reference.jackson-annotations-2.2.3.jar"/>
+        <basename file="${file.reference.jackson-core-2.2.3.jar}" property="manifest.file.reference.jackson-core-2.2.3.jar"/>
+        <basename file="${file.reference.jackson-databind-2.2.3.jar}" property="manifest.file.reference.jackson-databind-2.2.3.jar"/>
+        <basename file="${file.reference.jersey-bundle-1.17.1.jar}" property="manifest.file.reference.jersey-bundle-1.17.1.jar"/>
+        <basename file="${file.reference.jersey-json-1.18.jar}" property="manifest.file.reference.jersey-json-1.18.jar"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Extension-List" value="jar-1 "/>
+            <attribute name="Extension-List" value="jar-1 jar-2 jar-3 jar-4 jar-5 jar-6 "/>
             <attribute name="jar-1-Extension-Name" value="${manifest.file.reference.UnaCloudIaaSAPI.jar}"/>
+            <attribute name="jar-2-Extension-Name" value="${manifest.file.reference.jackson-annotations-2.2.3.jar}"/>
+            <attribute name="jar-3-Extension-Name" value="${manifest.file.reference.jackson-core-2.2.3.jar}"/>
+            <attribute name="jar-4-Extension-Name" value="${manifest.file.reference.jackson-databind-2.2.3.jar}"/>
+            <attribute name="jar-5-Extension-Name" value="${manifest.file.reference.jersey-bundle-1.17.1.jar}"/>
+            <attribute name="jar-6-Extension-Name" value="${manifest.file.reference.jersey-json-1.18.jar}"/>
         </manifest>
     </target>
     <target depends="compile" name="library-inclusion-in-manifest">
         <copyfiles files="${file.reference.UnaCloudIaaSAPI.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jackson-annotations-2.2.3.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jackson-core-2.2.3.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jackson-databind-2.2.3.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-bundle-1.17.1.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-json-1.18.jar}" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target name="-copy-meta-inf">

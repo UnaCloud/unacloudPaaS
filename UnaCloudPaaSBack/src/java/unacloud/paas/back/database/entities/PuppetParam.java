@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -31,10 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(uniqueConstraints = {
     @UniqueConstraint(columnNames = {"name", "puppetmodule_name"})})
 @NamedQueries({
-    @NamedQuery(name = "Puppetparam.findAll", query = "SELECT p FROM Puppetparam p"),
-    @NamedQuery(name = "Puppetparam.findByName", query = "SELECT p FROM Puppetparam p WHERE p.name = :name"),
-    @NamedQuery(name = "Puppetparam.findByDefaultValue", query = "SELECT p FROM Puppetparam p WHERE p.defaultValue = :defaultValue"),
-    @NamedQuery(name = "Puppetparam.findById", query = "SELECT p FROM Puppetparam p WHERE p.id = :id")})
+    @NamedQuery(name = "Puppetparam.findAll", query = "SELECT p FROM PuppetParam p"),
+    @NamedQuery(name = "Puppetparam.findByName", query = "SELECT p FROM PuppetParam p WHERE p.name = :name"),
+    @NamedQuery(name = "Puppetparam.findById", query = "SELECT p FROM PuppetParam p WHERE p.id = :id")})
 public class PuppetParam implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
@@ -52,18 +50,14 @@ public class PuppetParam implements Serializable {
     private Long id;
     @JoinColumn(name = "puppetmodule_name", referencedColumnName = "name", nullable = false)
     @ManyToOne(optional = false)
-    private PuppetModule puppetmoduleName;
+    private PuppetModule puppetModule;
 
     public PuppetParam() {
     }
 
-    public PuppetParam(Long id) {
-        this.id = id;
-    }
-
-    public PuppetParam(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public PuppetParam(String name,String value) {
+        this.name=name;
+        this.defaultValue=value;
     }
 
     public String getName() {
@@ -90,12 +84,12 @@ public class PuppetParam implements Serializable {
         this.id = id;
     }
 
-    public PuppetModule getPuppetmoduleName() {
-        return puppetmoduleName;
+    public PuppetModule getPuppetModule() {
+        return puppetModule;
     }
 
-    public void setPuppetmoduleName(PuppetModule puppetmoduleName) {
-        this.puppetmoduleName = puppetmoduleName;
+    public void setPuppetModule(PuppetModule puppetModule) {
+        this.puppetModule = puppetModule;
     }
 
     @Override

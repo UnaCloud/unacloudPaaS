@@ -12,6 +12,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import unacloud.paas.back.database.entities.User;
+import unacloud.paas.back.user.FolderManager;
 
 /**
  *
@@ -27,5 +28,9 @@ public class UserManagerBean {
     private EntityManager entityManager;
     public List<User> getUserList() {
         return entityManager.createNamedQuery("User.findAll",User.class).getResultList();
+    }
+    public void registerUser(User user){
+        entityManager.persist(user);
+        FolderManager.createUserFolder(user.getUsername());
     }
 }

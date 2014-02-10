@@ -8,6 +8,7 @@ import java.util.List;
 import unacloud.paas.back.utils.PaaSUtils;
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import unacloud.paas.back.database.entities.Node;
@@ -28,7 +29,7 @@ public class ClusterServices {
     static UnaCloudOperations unacloudiaas = new UnaCloudOperations("ga.sotelo69", "asdasdasd");
 
     public static DeployedCluster startCluster(VirtualClusterRequest request){
-        String clusterIdString=unacloudiaas.startVirtualCluster(request);
+        /*String clusterIdString=unacloudiaas.startVirtualCluster(request);
         if (clusterIdString==null||!clusterIdString.matches("[0-9]+"))return null;
         long clusterId=Long.parseLong(clusterIdString);
         
@@ -50,6 +51,16 @@ public class ClusterServices {
                     dcr.nodes.add(vme);
                     break;
                 }
+            }
+        }*/
+        int i=0;
+        DeployedCluster deployedCluster=new DeployedCluster(1024);
+        for(VirtualImageRequest vir:request.getVms()){
+            DeployedClusterRol dcr=new DeployedClusterRol(vir.getImageId());
+            deployedCluster.roles.add(dcr);
+            for(int e=0;e<vir.getInstances();e++){
+                dcr.getNodes().add(new VirtualMachineExecutionWS(vir.getImageId(),"192.168.1."+(e+2),VirtualMachineStatusEnum.DEPLOYED,"Started",i,new Date(), "paas"+i));
+                i++;
             }
         }
         //Logger.getLogger("PaaS").log(Level.INFO, "startedCluster {0} {1} {2}", new Object[]{size, template, coresPerNode});

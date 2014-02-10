@@ -6,9 +6,10 @@ package unacloud.paas.web.cloud;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.annotation.ManagedBean;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -23,6 +24,9 @@ public class FileSystemAddBean{
    String name;
    String path;
    UploadedFile file; 
+   
+   @EJB
+   FolderManager folderManager;
    /**
     * Creates a new instance of FileSystemAddBean
     */
@@ -59,7 +63,7 @@ public class FileSystemAddBean{
    }
    public String addFile(){
       try{
-         FolderManager.uploadUserFile(path,name, FacesContext.getCurrentInstance().getExternalContext().getRemoteUser(),file.getInputstream());
+         folderManager.uploadUserFile(path,name, FacesContext.getCurrentInstance().getExternalContext().getRemoteUser(),file.getInputstream());
          path=name=null;
          file=null;
       }catch(IOException ex){

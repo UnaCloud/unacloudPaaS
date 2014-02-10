@@ -1,21 +1,23 @@
 package unacloud.paas.back.database.entities;
 
 import javax.annotation.Generated;
-import javax.persistence.metamodel.CollectionAttribute;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
-import unacloud.paas.back.database.entities.PlatformExecution;
+import unacloud.paas.back.database.entities.MainCommand;
 import unacloud.paas.back.database.entities.Rol;
+import unacloud.paas.back.database.entities.SSHSharedKey;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-02-08T18:21:52")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-02-09T18:35:10")
 @StaticMetamodel(Platform.class)
 public class Platform_ { 
 
-    public static volatile CollectionAttribute<Platform, PlatformExecution> platformExecutionCollection;
-    public static volatile CollectionAttribute<Platform, Rol> rolCollection;
+    public static volatile SingularAttribute<Platform, Long> id;
     public static volatile SingularAttribute<Platform, String> name;
     public static volatile SingularAttribute<Platform, String> waiterClass;
-    public static volatile SingularAttribute<Platform, Integer> idplatform;
-    public static volatile SingularAttribute<Platform, String> imagename;
+    public static volatile ListAttribute<Platform, Rol> rol;
+    public static volatile SingularAttribute<Platform, Long> clusterId;
+    public static volatile ListAttribute<Platform, SSHSharedKey> sshSharedKeys;
+    public static volatile SingularAttribute<Platform, MainCommand> mainCommand;
 
 }

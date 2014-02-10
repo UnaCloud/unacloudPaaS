@@ -4,16 +4,19 @@
  */
 package unacloud.paas.web.admin;
 
+import com.google.common.hash.Hashing;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.ManagedBean;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import unacloud.paas.back.database.DatabaseConnection;
+import unacloud.paas.back.beans.UserManagerBean;
+import unacloud.paas.back.database.entities.User;
 import unacloud.paas.back.user.FolderManager;
 
 /**
@@ -23,7 +26,8 @@ import unacloud.paas.back.user.FolderManager;
 @ManagedBean
 @RequestScoped
 public class UserRegisterBean {
-
+    @EJB
+    private UserManagerBean userManagerBean;
     String username,firstname,lastname,password,repeatpass,email,description;
     public UserRegisterBean() {
     }
@@ -86,23 +90,15 @@ public class UserRegisterBean {
     public String insert(){
         if(password==null||repeatpass==null||password.isEmpty()||!password.equals(repeatpass))FacesContext.getCurrentInstance().addMessage("valid", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Passwords doesn't match", ""));
         else{
-            try {
-                Connection con= DatabaseConnection.getConnection();
-                PreparedStatement ps=con.prepareStatement("INSERT INTO `unacloudpaas`.`user`(`username`,`firstname`,`lastname`,`password`,`hash`,`email`,`description`)\n" +
-                    "VALUES (?,?,?,md5(?),md5(?),?,?);");
-                ps.setString(1,username);
-                ps.setString(2,firstname);
-                ps.setString(3,lastname);
-                ps.setString(4,password);
-                ps.setString(5,username);
-                ps.setString(6,email);
-                ps.setString(7,description);
-                ps.executeUpdate();
-                ps.close();con.close();
-                FolderManager.createUserFolder(username);
-            } catch (SQLException ex) {
-                Logger.getLogger(UserRegisterBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            User user=new User();
+            user.setUsername(username);
+            user.setFirstname(firstname);
+            user.setEmail(email);
+            user.setLastname(lastname);
+            user.setPassword(password);
+            user.setDescription(description);
+            user.setActivated(false);
+            user.setHash(Hashing.md5().hashBytes(username.getBytes()).toString());
         }
         return null;
     }

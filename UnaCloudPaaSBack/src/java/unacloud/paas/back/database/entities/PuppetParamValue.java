@@ -32,10 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @UniqueConstraint(columnNames = {"puppetModuleUsage_id", "name"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Puppetparamvalue.findAll", query = "SELECT p FROM Puppetparamvalue p"),
-    @NamedQuery(name = "Puppetparamvalue.findByName", query = "SELECT p FROM Puppetparamvalue p WHERE p.name = :name"),
-    @NamedQuery(name = "Puppetparamvalue.findByValor", query = "SELECT p FROM Puppetparamvalue p WHERE p.valor = :valor"),
-    @NamedQuery(name = "Puppetparamvalue.findById", query = "SELECT p FROM Puppetparamvalue p WHERE p.id = :id")})
+    @NamedQuery(name = "Puppetparamvalue.findAll", query = "SELECT p FROM PuppetParamValue p"),
+    @NamedQuery(name = "Puppetparamvalue.findByName", query = "SELECT p FROM PuppetParamValue p WHERE p.name = :name"),
+    @NamedQuery(name = "Puppetparamvalue.findByValor", query = "SELECT p FROM PuppetParamValue p WHERE p.valor = :valor"),
+    @NamedQuery(name = "Puppetparamvalue.findById", query = "SELECT p FROM PuppetParamValue p WHERE p.id = :id")})
 public class PuppetParamValue implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
@@ -43,16 +43,19 @@ public class PuppetParamValue implements Serializable {
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String name;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String valor;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Long id;
+    
     @JoinColumn(name = "puppetModuleUsage_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private PuppetModuleUsage puppetModuleUsage;

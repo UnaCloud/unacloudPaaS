@@ -4,13 +4,14 @@
  */
 package unacloud.paas.web.cloud;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.annotation.ManagedBean;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
-import unacloud.paas.back.cluster.platforms.ClusterManager;
-import unacloud.paas.data.entities.enums.ExecutionState;
-import unacloud.paas.data.execution.PlatformExecutionEntity;
-import unacloud.paas.data.managers.PlatformExecutionManager;
+import unacloud.paas.back.beans.ClusterManagerBean;
+import unacloud.paas.back.beans.PlatformExecutionManagerBean;
+import unacloud.paas.back.database.entities.PlatformExecution;
+import unacloud.paas.back.database.enums.ExecutionState;
 /**
  *
  * @author G
@@ -18,19 +19,23 @@ import unacloud.paas.data.managers.PlatformExecutionManager;
 @ManagedBean
 @RequestScoped
 public class PlatformExecutionListBean{
-   List<PlatformExecutionEntity> runningList;
+    List<PlatformExecution> runningList;
+    @EJB
+    PlatformExecutionManagerBean platformExecutionManagerBean;
+    @EJB
+    ClusterManagerBean clusterManagerBean;
    public PlatformExecutionListBean(){
    }
-   public List<PlatformExecutionEntity> getRunningList(){
-      if(runningList==null)runningList=PlatformExecutionManager.getRunningPlatformExecutionList(FacesContext.getCurrentInstance().getExternalContext().getRemoteUser());
+   public List<PlatformExecution> getRunningList(){
+      if(runningList==null)runningList=platformExecutionManagerBean.getRunningPlatformExecutionList(FacesContext.getCurrentInstance().getExternalContext().getRemoteUser());
       return runningList;
    }
-   public void setRunningList(List<PlatformExecutionEntity> runningList){
+   public void setRunningList(List<PlatformExecution> runningList){
       this.runningList=runningList;
    }
    public String stopPlatform(long id){
       //TODO update runningTable 
-      ClusterManager.stopCluster(id, ExecutionState.CANCELED);
+      clusterManagerBean.stopCluster(id, ExecutionState.CANCELED);
       return null;
    }
 }

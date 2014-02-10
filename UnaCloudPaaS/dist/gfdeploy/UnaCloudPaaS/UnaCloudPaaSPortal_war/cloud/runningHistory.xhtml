@@ -1,0 +1,41 @@
+<ui:composition template="/templates/contextTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:param name="titulotab" value="Running History" />
+    <ui:define name="body">
+        <h:form>
+            <p:dataTable value="#{runningHistoryBean.list}" var="r">
+                <p:column headerText="Id">
+                    <h:outputText value="#{r.id}" />
+                </p:column>
+                <p:column headerText="hexId">
+                    <h:outputText value="#{r.hexId}" />
+                </p:column>
+                <p:column headerText="Run name">
+                    <h:outputText value="#{r.runName}" />
+                </p:column>
+                <p:column headerText="Plaftorm">
+                    <h:outputText value="#{r.platform.name}" />
+                </p:column>
+                <p:column headerText="State">
+                    <h:outputText value="#{r.stateName}" />
+                </p:column>
+                <p:column headerText="Options">
+                    <h:button outcome="platformExecutionDetail" image="/resources/icons/view.png">
+                        <f:param name="platformExecutionId" value="#{r.id}" />   
+                    </h:button>
+                    <p:commandButton ajax="true" rendered="${r.state != 3}" icon="ui-icon-trash" action="#{runningHistoryBean.toDeletePlatform(r.id)}" oncomplete="confirmDelete.show();" update=":confirmForm"/>
+                    
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <p:dialog header="Are you sure?" id="confirmDeleteId" widgetVar="confirmDelete">
+            <h:form id="confirmForm">
+                <h:outputText value="Are you sure you want to delete platform #{runningHistoryBean.platformToDelete}"/>
+                <p:commandButton ajax="true" value="Delete" action="#{runningHistoryBean.deletePlatform()}"/>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

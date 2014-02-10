@@ -88,10 +88,10 @@ public class User implements Serializable {
     @ManyToMany
     private List<Grupo> grupos;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userUsername")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<PlatformExecution> platformExecutions;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userUsername")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserFile> userFiles;
 
     public User() {

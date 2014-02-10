@@ -3,22 +3,25 @@
  * and open the template in the editor.
  */
 package unacloud.paas.web.cloud;
+import javax.ejb.EJB;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import unacloud.paas.data.entities.PuppetModule;
-import unacloud.paas.data.managers.PuppetModuleManager;
+import unacloud.paas.back.beans.PuppetModuleManagerBean;
+import unacloud.paas.back.database.entities.PuppetModule;
 /**
  *
  * @author G
  */
 @FacesConverter("puppetmoduleconverter")
 public class PuppetModuleConverter implements Converter{
+    @EJB
+    PuppetModuleManagerBean puppetModuleManagerBean;
    @Override
    public Object getAsObject(FacesContext context, UIComponent component, String value){
       if(value==null||value.isEmpty())return null;
-      return PuppetModuleManager.getPuppetModule(value);
+      return puppetModuleManagerBean.getPuppetModule(value);
    }
    @Override
    public String getAsString(FacesContext context, UIComponent component, Object value){

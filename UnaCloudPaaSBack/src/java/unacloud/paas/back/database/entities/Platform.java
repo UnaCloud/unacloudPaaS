@@ -7,7 +7,6 @@
 package unacloud.paas.back.database.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Platform.findAll", query = "SELECT p FROM Platform p"),
     @NamedQuery(name = "Platform.findById", query = "SELECT p FROM Platform p WHERE p.id = :id"),
     @NamedQuery(name = "Platform.findByName", query = "SELECT p FROM Platform p WHERE p.name = :name"),
-    @NamedQuery(name = "Platform.findByImagename", query = "SELECT p FROM Platform p WHERE p.imagename = :imagename"),
     @NamedQuery(name = "Platform.findByWaiterClass", query = "SELECT p FROM Platform p WHERE p.waiterClass = :waiterClass")})
 public class Platform implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -45,9 +44,6 @@ public class Platform implements Serializable {
     @Size(max = 45)
     @Column(length = 45)
     private String name;
-    @Size(max = 30)
-    @Column(length = 30)
-    private String imagename;
     
     private long clusterId;
     
@@ -55,11 +51,14 @@ public class Platform implements Serializable {
     @Column(length = 45)
     private String waiterClass;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "platformIdplatform")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "platform")
     private List<Rol> rol;
     
     @OneToMany(mappedBy = "platform")
     private List<SSHSharedKey> sshSharedKeys;
+    
+    @OneToOne
+    private MainCommand mainCommand;
 
     public Platform() {
     }
@@ -74,14 +73,6 @@ public class Platform implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImagename() {
-        return imagename;
-    }
-
-    public void setImagename(String imagename) {
-        this.imagename = imagename;
     }
 
     public String getWaiterClass() {
@@ -117,5 +108,12 @@ public class Platform implements Serializable {
     public void setClusterId(long clusterId) {
         this.clusterId = clusterId;
     }
-    
+
+    public MainCommand getMainCommand() {
+        return mainCommand;
+    }
+
+    public void setMainCommand(MainCommand mainCommand) {
+        this.mainCommand = mainCommand;
+    }
 }

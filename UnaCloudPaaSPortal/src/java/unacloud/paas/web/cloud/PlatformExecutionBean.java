@@ -5,11 +5,12 @@
 package unacloud.paas.web.cloud;
 import java.io.Serializable;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import unacloud.paas.data.entities.LogEntity;
-import unacloud.paas.data.execution.PlatformExecutionEntity;
-import unacloud.paas.data.managers.PlatformExecutionManager;
+import javax.annotation.ManagedBean;
+import javax.ejb.EJB;
+import javax.faces.view.ViewScoped;
+import unacloud.paas.back.beans.PlatformExecutionManagerBean;
+import unacloud.paas.back.database.entities.ExecutionLog;
+import unacloud.paas.back.database.entities.PlatformExecution;
 /**
  *
  * @author G
@@ -17,16 +18,18 @@ import unacloud.paas.data.managers.PlatformExecutionManager;
 @ManagedBean
 @ViewScoped
 public class PlatformExecutionBean implements Serializable{
-   PlatformExecutionEntity selectedPlatform=null;
-   List<LogEntity> log=null;
-   long selectedId;
+    PlatformExecution selectedPlatform=null;
+    List<ExecutionLog> log=null;
+    long selectedId;
+    @EJB
+    PlatformExecutionManagerBean platformExecutionManagerBean;
    public PlatformExecutionBean(){
    }
-   public PlatformExecutionEntity getSelectedPlatform(){
-      if(selectedPlatform==null)selectedPlatform=PlatformExecutionManager.getPlatformExecution(selectedId);
+   public PlatformExecution getSelectedPlatform(){
+      if(selectedPlatform==null)selectedPlatform=platformExecutionManagerBean.getPlatformExecution(selectedId);
       return selectedPlatform;
    }
-   public void setSelectedPlatform(PlatformExecutionEntity selectedPlatform){
+   public void setSelectedPlatform(PlatformExecution selectedPlatform){
       this.selectedPlatform=selectedPlatform;
    }
    public long getSelectedId(){
@@ -35,13 +38,13 @@ public class PlatformExecutionBean implements Serializable{
    public void setSelectedId(long selectedId){
       this.selectedId=selectedId;
    }
-   public List<LogEntity> getLog(){
+   public List<ExecutionLog> getLog(){
       if(log==null){
-         log=PlatformExecutionManager.getPlatformLog(selectedId);
+          log=platformExecutionManagerBean.getPlatformLog(selectedId);
       }
       return log;
    }
-   public void setLog(List<LogEntity> log){
+   public void setLog(List<ExecutionLog> log){
       this.log=log;
    }
 }

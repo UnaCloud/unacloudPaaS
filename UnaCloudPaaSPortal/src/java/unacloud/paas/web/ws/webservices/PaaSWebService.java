@@ -4,27 +4,8 @@
  */
 package unacloud.paas.web.ws.webservices;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.context.FacesContext;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import unacloud.paas.back.cluster.platforms.ClusterManager;
-import unacloud.paas.data.entities.MainCommand;
-import unacloud.paas.data.entities.PuppetModuleUsage;
-import unacloud.paas.data.entities.enums.ResourceType;
-import unacloud.paas.data.execution.CommandExecutionEntity;
-import unacloud.paas.data.execution.FileDescriptionEntity;
-import unacloud.paas.data.execution.PlatformExecutionEntity;
-import unacloud.paas.data.execution.RoleExecutionEntity;
-import unacloud.paas.data.managers.PlatformExecutionManager;
-import unacloud.paas.data.managers.PuppetModuleManager;
-import unacloud.paas.web.webservices.PaaSAPIWS;
 
 /**
  *
@@ -38,16 +19,18 @@ public class PaaSWebService {
     public static enum PLATFORM{
         HPL,IOZONE
     } 
-    /**
-     * This is a sample web service operation
-     */
+    @WebMethod(operationName = "runTest")
+    public String runTest(){
+        return "Hola mundo";
+    }
+    /*
     @WebMethod(operationName = "runTest")
     public String runTest(@WebParam(name = "test") PLATFORM test,@WebParam(name = "cores") int cores,@WebParam(name = "runType") RUN_TYPE type,@WebParam(name = "specialId") int specialId) {
         PlatformExecutionEntity toRun=PlatformExecutionManager.generateVoidPlatformExecution(test== PLATFORM.HPL?1:3);
         List<FileDescriptionEntity> files=new ArrayList<>();
         toRun.getRoles().get(0).setCores(cores);
         toRun.getRoles().get(0).setCoresPerNode(1);
-        String mainCommandArgs/*=""*/;
+        String mainCommandArgs;
         if(test== PLATFORM.HPL){
             toRun.setRunName("CCGridHPL_"+cores+(type== RUN_TYPE.DUPLEX?":"+specialId:""));
             try {
@@ -83,5 +66,5 @@ public class PaaSWebService {
             ex.printStackTrace();
         }
         return ""+toRun.getId()+" "+toRun.getHexId();
-    }
+    }*/
 }

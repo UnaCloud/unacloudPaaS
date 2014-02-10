@@ -12,23 +12,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.annotation.ManagedBean;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
-import unacloud.paas.back.cluster.platforms.ClusterManager;
+import unacloud.paas.back.beans.ClusterManagerBean;
+import unacloud.paas.back.beans.PlatformExecutionManagerBean;
+import unacloud.paas.back.beans.PuppetModuleManagerBean;
+import unacloud.paas.back.database.entities.Command;
+import unacloud.paas.back.database.entities.MainCommand;
+import unacloud.paas.back.database.entities.PlatformExecution;
+import unacloud.paas.back.database.entities.PuppetModule;
+import unacloud.paas.back.database.entities.PuppetModuleUsage;
+import unacloud.paas.back.database.entities.RolExecution;
+import unacloud.paas.back.database.enums.ResourceType;
 import unacloud.paas.back.user.FolderManager;
-import unacloud.paas.data.entities.MainCommand;
-import unacloud.paas.data.entities.PuppetModule;
-import unacloud.paas.data.entities.PuppetModuleUsage;
-import unacloud.paas.data.entities.enums.ResourceType;
-import unacloud.paas.data.execution.CommandExecutionEntity;
 import unacloud.paas.data.execution.FileDescriptionEntity;
-import unacloud.paas.data.execution.PlatformExecutionEntity;
-import unacloud.paas.data.execution.RoleExecutionEntity;
-import unacloud.paas.data.managers.PlatformExecutionManager;
-import unacloud.paas.data.managers.PuppetModuleManager;
 /**
  *
  * @author G
@@ -36,21 +37,28 @@ import unacloud.paas.data.managers.PuppetModuleManager;
 @ManagedBean
 @ViewScoped
 public class NewRunBean implements Serializable{
-   PlatformExecutionEntity toRun=null;
-   String mainCommandArgs;
-   List<FileDescriptionEntity> files=new ArrayList<>();
-   PuppetModule puppetModule;
-   String roleToAddNewPuppetModule;
+    PlatformExecution toRun=null;
+    String mainCommandArgs;
+    List<FileDescriptionEntity> files=new ArrayList<>();
+    PuppetModule puppetModule;
+    String roleToAddNewPuppetModule;
+    
+    @EJB
+    PlatformExecutionManagerBean platformExecutionManagerBean;
+    @EJB
+    ClusterManagerBean clusterManagerBean;
+    @EJB
+    PuppetModuleManagerBean puppetModuleManagerBean;
    public NewRunBean(){
    }
    public String selectPlatform(int platformId){
-      toRun=PlatformExecutionManager.generateVoidPlatformExecution(platformId);
+      toRun=platformExecutionManagerBean.generateVoidPlatformExecution(platformId);
       return null;
    }
-   public PlatformExecutionEntity getToRun(){
+   public PlatformExecution getToRun(){
       return toRun;
    }
-   public void setToRun(PlatformExecutionEntity toRun){
+   public void setToRun(PlatformExecution toRun){
       this.toRun=toRun;
    }
    
@@ -61,15 +69,15 @@ public class NewRunBean implements Serializable{
       this.files=files;
    }
    public String startPlatform(){
-      MainCommand mainCommand=toRun.getPlatform().getMainCommand();
+       MainCommand mainCommand=toRun.getPlatform().getMainCommand();
       if(mainCommand!=null&&mainCommandArgs!=null){
-         for(RoleExecutionEntity role:toRun.getRoles())if(role.getRoleConfig().getRoleName().equals(mainCommand.getRoleId())){
-            for(CommandExecutionEntity command:role.getCommandExecutions())if(command.isMainCommand()){
+         for(RolExecution role:toRun.getRolExecution())if(role.getRol().getId()==mainCommand.getRoleId()){
+            for(Command command:role.getCommand())if(command.getMainCommand()){
                command.setCommand(mainCommand.getCommand().trim()+" "+mainCommandArgs.trim());
             }
          }
       }
-      ClusterManager.createCluster(toRun, FacesContext.getCurrentInstance().getExternalContext().getRemoteUser(), files,false);
+      clusterManagerBean.createCluster(toRun, FacesContext.getCurrentInstance().getExternalContext().getRemoteUser(), files,false);
       return "running";
    }
    public PuppetModule getPuppetModule(){
@@ -82,7 +90,7 @@ public class NewRunBean implements Serializable{
       if(query==null||query.isEmpty()){
          return Collections.EMPTY_LIST;
       }
-      return PuppetModuleManager.getPuppetModules(query);
+      return puppetModuleManagerBean.getPuppetModules(query);
    }
    public String getRoleToAddNewPuppetModule(){
       return roleToAddNewPuppetModule;
@@ -101,9 +109,9 @@ public class NewRunBean implements Serializable{
    }
    public String addModule(){
       int e=0;
-      if(toRun!=null)for(RoleExecutionEntity r : toRun.getRoles()){
-         if(r.getRoleConfig().getRoleName().equals(roleToAddNewPuppetModule)){
-            r.getPuppetModules().add(new PuppetModuleUsage(-1, puppetModule));
+      if(toRun!=null)for(RolExecution r : toRun.getRolExecution()){
+         if(r.getRol().getName().equals(roleToAddNewPuppetModule)){
+            r.getPuppetModuleUsage().add(new PuppetModuleUsage(puppetModule));
             RequestContext.getCurrentInstance().execute("addModuleDialogWv.hide();");
             RequestContext.getCurrentInstance().update("mainForm:rolesTable:"+e+":rol");
             puppetModule=null;
@@ -114,7 +122,7 @@ public class NewRunBean implements Serializable{
    }
    public String addLocalFile(String path,String name){
       try{
-         files.add(new FileDescriptionEntity(name,path,new FileInputStream(FolderManager.getFile(name, path,FacesContext.getCurrentInstance().getExternalContext().getRemoteUser())),ResourceType.GLOBAL, toRun.getPlatform().getRoles().get(0).getRoleName()));
+         files.add(new FileDescriptionEntity(name,path,new FileInputStream(FolderManager.getFile(name, path,FacesContext.getCurrentInstance().getExternalContext().getRemoteUser())),ResourceType.GLOBAL, toRun.getPlatform().getRol().get(0).getName()));
       }catch(FileNotFoundException ex){
          Logger.getLogger(NewRunBean.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -122,7 +130,7 @@ public class NewRunBean implements Serializable{
    }
    public void handleFileUpload(FileUploadEvent event){
       try{
-         files.add(new FileDescriptionEntity(event.getFile().getFileName(), "/", event.getFile().getInputstream(), ResourceType.GLOBAL, toRun.getPlatform().getRoles().get(0).getRoleName()));
+         files.add(new FileDescriptionEntity(event.getFile().getFileName(), "/", event.getFile().getInputstream(), ResourceType.GLOBAL, toRun.getPlatform().getRol().get(0).getName()));
       }catch(IOException ex){
          Logger.getLogger(NewRunBean.class.getName()).log(Level.SEVERE, null, ex);
       }

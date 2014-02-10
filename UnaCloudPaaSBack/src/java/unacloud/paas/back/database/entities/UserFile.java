@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UserFile.findAll", query = "SELECT u FROM UserFile u"),
     @NamedQuery(name = "UserFile.findByName", query = "SELECT u FROM UserFile u WHERE u.name = :name"),
     @NamedQuery(name = "UserFile.findByPath", query = "SELECT u FROM UserFile u WHERE u.path = :path"),
-    @NamedQuery(name = "UserFile.findByUserFilecol", query = "SELECT u FROM UserFile u WHERE u.userFilecol = :userFilecol"),
     @NamedQuery(name = "UserFile.findById", query = "SELECT u FROM UserFile u WHERE u.id = :id")})
 public class UserFile implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -49,14 +48,13 @@ public class UserFile implements Serializable {
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String path;
-    @Size(max = 45)
-    @Column(length = 45)
-    private String userFilecol;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(nullable = false)
     private Long id;
+    
     @JoinColumn(name = "user_username", referencedColumnName = "username", nullable = false)
     @ManyToOne(optional = false)
     private User user;
@@ -84,14 +82,6 @@ public class UserFile implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public String getUserFilecol() {
-        return userFilecol;
-    }
-
-    public void setUserFilecol(String userFilecol) {
-        this.userFilecol = userFilecol;
     }
 
     public Long getId() {

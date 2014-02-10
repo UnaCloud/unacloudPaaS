@@ -45,10 +45,10 @@ public class PuppetModule implements Serializable {
     @Column(length = 65535)
     private String description;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "puppetmoduleName")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "puppetModule")
     private List<PuppetModuleUsage> puppetModuleUsage;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "puppetmoduleName")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "puppetModule")
     private List<PuppetParam> puppetParams;
 
     public PuppetModule() {
