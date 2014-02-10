@@ -4,9 +4,9 @@
  */
 package unacloud.paas.web.admin;
 import java.util.List;
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.RequestScoped;
 import unacloud.paas.back.beans.UserManagerBean;
 import unacloud.paas.back.database.entities.User;
 /**

@@ -35,7 +35,7 @@ import unacloudws.requests.VirtualImageRequest;
  */
 @Entity
 @Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"platformExecution", "name"})})
+    @UniqueConstraint(columnNames = {"platformExecution_id", "name"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "RolExecution.findAll", query = "SELECT r FROM RolExecution r"),

@@ -8,7 +8,7 @@ import unacloud.paas.back.database.entities.MainCommand;
 import unacloud.paas.back.database.entities.Rol;
 import unacloud.paas.back.database.entities.SSHSharedKey;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-02-09T18:35:10")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-02-09T20:37:18")
 @StaticMetamodel(Platform.class)
 public class Platform_ { 
 

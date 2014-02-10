@@ -4,7 +4,10 @@
                 xmlns:p="http://primefaces.org/ui">
     <ui:param name="titulo" value="UnaCloud: Infrastructure as a Service" />
     <ui:define name="body">
-        <form action="j_security_check" method="POST">
+        <h:form>
+            
+        
+        <!--<form action="j_security_check" method="POST">-->
             <p:panel header="Login">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Username*" />
@@ -15,6 +18,7 @@
                     <input type="submit" value="Login" style="float: right;padding: 5px;font-weight: bold;color: #333333;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" />
                 </h:panelGrid>
             </p:panel>
-        </form>
+        <!--</form>-->
+        </h:form>
     </ui:define>
 </ui:composition>

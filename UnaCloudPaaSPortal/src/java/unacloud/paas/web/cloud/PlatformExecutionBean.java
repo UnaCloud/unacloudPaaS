@@ -5,7 +5,7 @@
 package unacloud.paas.web.cloud;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import unacloud.paas.back.beans.PlatformExecutionManagerBean;
