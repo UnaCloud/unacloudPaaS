@@ -1,0 +1,13 @@
+
+# Users
+
+users:
+
+    - !!models.User
+        username:   admin
+        firstname:  system
+        lastname:   administrator
+        password:   asdasdasd
+        activated:  true
+        email:      gasotelo@gmail.com
+        description:    Nada para decir

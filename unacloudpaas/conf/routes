@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Home.index()
+GET     /newRun                     controllers.NewRun.index()
+GET     /newRunConfig               controllers.NewRun.newRun(platformId: Long ?=0)
+POST    /newRunStart                controllers.NewRun.start()
+GET     /running                    controllers.NewRun.runningList()
+GET     /runningHistory             controllers.NewRun.runningHistory()
+GET     /myFiles                    controllers.Files.index()
+GET     /hello                      controllers.Formulario.sayHello()
+GET     /login                      controllers.Login.login()
+POST    /login                      controllers.Login.authenticate()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+
+

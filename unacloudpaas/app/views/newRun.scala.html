@@ -1,0 +1,26 @@
+@(platforms: List[Platform])
+
+@import helper._
+
+@main(title = "The 'helloworld' application",menuId="newRunBtn"){
+    <div class="panel panel-default">
+        <div class="panel-heading">Platform selection</div>
+        <div class="panel-body">
+            <h3><span class="label label-default">Select a platform:</span></h3>
+            <div class="row">
+                @platforms.map { plat =>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <a href="@routes.NewRun.newRun(plat.id)">
+                                <img src="@routes.Assets.at("images/platform-logos/"+plat.name+".png")" alt="..." style="width: 200px;height: 200px;">
+                                <div class="caption text-center">
+                                    <h3 style="color: #428bca">@plat.name</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

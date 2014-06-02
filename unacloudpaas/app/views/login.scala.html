@@ -1,0 +1,27 @@
+@(form: Form[Login.LoginData]
+)
+<html>
+<head>
+    <title>Zentasks</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+</head>
+<body>
+<header>
+    <a href="@routes.Home.index" id="logo"><span>Zen</span>tasks</a>
+</header>
+@helper.form(routes.Login.authenticate) {
+<h1>Sign in</h1>
+
+<p>
+    <input type="username" name="username" value="@form("email").value">
+</p>
+<p>
+    <input type="password" name="password" placeholder="Password">
+</p>
+<p>
+    <button type="submit">Login</button>
+</p>
+}
+</body>
+</html>

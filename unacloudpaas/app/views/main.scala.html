@@ -1,0 +1,80 @@
+@(title: String, scripts: Html = Html(""),menuId: String)(content: Html)
+<html xmlns="http://www.w3.org/1999/html">
+    <head>
+        <title>@title</title>
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
+        @scripts
+    </head>
+    <body>
+    <!-- Header -->
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-toggle"></span>
+            </button>
+            <a class="navbar-brand" href="#">UnaCloud PaaS<small> - Platform as a Service for eScience</small></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+                        <strong>Admin</strong> <span class="caret"></span></a>
+                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="#">My Profile</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Header -->
+
+    <!-- Main -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Left -->
+                <strong>Main menu</strong>
+                <hr>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="nav-header"></li>
+                    <li>My Cloud</li>
+                    <li @if(menuId=="btnHome"){class="active"}><a id="btnHome" href="@routes.Home.index()">Home</a></li>
+                    <li @if(menuId=="newRunBtn"){class="active"}><a id="newRunBtn" href="@routes.NewRun.index()">New Run</a></li>
+                    <li @if(menuId=="runningBtn"){class="active"}><a id="runningBtn" href="@routes.NewRun.runningList()">Running (0)</a></li>
+                    <li @if(menuId=="historyBtn"){class="active"}><a id="historyBtn" href="@routes.NewRun.runningHistory()">Running history</a></li>
+                    <li @if(menuId=="filesBtn"){class="active"}><a id="filesBtn" href="@routes.Files.index()">My files</a></li>
+                    <li>My Account</li>
+                    <li @if(menuId=="accountBtn"){class="active"}><a id="accountBtn" href="#">Account Settings</a></li>
+                    <li @if(menuId=="profileBtn"){class="active"}><a id="profileBtn" href="#">Profile</a></li>
+                    <li>Admin</li>
+                    <li @if(menuId=="platformBtn"){class="active"}><a id="platformBtn" href="#">Platforms</a></li>
+                    <li @if(menuId=="puppetModulesBtn"){class="active"}><a id="puppetModulesBtn" href="#">Puppet Modules</a></li>
+                    <li @if(menuId=="usersBtn"){class="active"}><a id="usersBtn" href="#">Users</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <!-- Right -->
+                <div class="row">
+                    <div id="col-md-9 mainContent">
+                        @content
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main -->
+
+    <!--
+    <footer>This Bootstrap 3 dashboard layout is compliments of Bootply.com | <a href="http://www.bootply.com/61526"><strong>Edit on Bootply</strong></a></footer>
+    -->
+    </body>
+</html>
