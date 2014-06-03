@@ -25,7 +25,7 @@ public class RolExecution extends Model{
     public List<Node> nodes=new ArrayList<>();
     @ManyToOne
     public PlatformExecution platformExecution;
-    @OneToMany(mappedBy = "rolExecution")
+    @OneToMany
     public List<Command> command=new ArrayList<>();
 
     public Long getId() {
