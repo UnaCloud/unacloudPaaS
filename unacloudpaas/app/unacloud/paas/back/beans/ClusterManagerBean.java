@@ -51,6 +51,7 @@ public class ClusterManagerBean {
                 main.command=platform.getMainCommand().getCommand()+" "+mainCommandArgs;
                 main.type=platform.getMainCommand().getResourceType();
                 main.runningUser = platform.getMainCommand().runningUser;
+                rolExecution.commands.add(main);
             }
         }
         for(RolDescription desc:rolDescriptions){

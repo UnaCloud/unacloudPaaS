@@ -26,7 +26,7 @@ public class RolExecution extends Model{
     @ManyToOne
     public PlatformExecution platformExecution;
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Command> command=new ArrayList<>();
+    public List<Command> commands=new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -60,8 +60,8 @@ public class RolExecution extends Model{
         return platformExecution;
     }
 
-    public List<Command> getCommand() {
-        return command;
+    public List<Command> getCommands() {
+        return commands;
     }
 
     public int getCores(){

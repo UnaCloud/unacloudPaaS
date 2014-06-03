@@ -84,8 +84,8 @@ public class RuntimeRoleExecutionBean {
     }
 
     public static void executeCommands(PlatformExecution plaformConfiguration,RolExecution roleConfiguration) {
-        System.out.println("Not empty "+roleConfiguration.getCommand().isEmpty());
-        for (Command command : roleConfiguration.getCommand()) {
+        System.out.println("Not empty "+roleConfiguration.getCommands().isEmpty());
+        for (Command command : roleConfiguration.getCommands()) {
             StringBuilder script = new StringBuilder("#!/bin/bash\n");
             String path;
             if (command.getType() == ResourceType.GLOBAL) {
