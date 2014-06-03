@@ -39,14 +39,11 @@ public class ClusterManagerBean {
         platformExecution.mainCommandArgs=mainCommandArgs;
         platformExecution.rolExecution=new ArrayList<>();
 
-        System.out.println("Comadno principal "+platform.getMainCommand().getRoleId());
         for(Rol rol:platform.roles){
             RolExecution rolExecution = new RolExecution();
             rolExecution.rol=rol;
-            if(rol.getPuppetModule()!=null)rolExecution.puppetModuleUsage.add(rol.getPuppetModule());
             platformExecution.rolExecution.add(rolExecution);
             if(rol.id==platform.getMainCommand().getRoleId()){
-                System.out.println("Asignado comando principal");
                 Command main=new Command();
                 main.mainCommand=true;
                 main.multiplicity=platform.getMainCommand().getMultiplicity();
