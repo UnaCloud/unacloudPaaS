@@ -21,7 +21,7 @@ public class RolExecution extends Model{
     @ManyToMany(cascade = CascadeType.PERSIST)
     public List<PuppetModuleUsage> puppetModuleUsage=new ArrayList<>();
 
-    @OneToMany(mappedBy = "rolExecution")
+    @OneToMany(mappedBy = "rolExecution",cascade =CascadeType.PERSIST)
     public List<Node> nodes=new ArrayList<>();
     @ManyToOne
     public PlatformExecution platformExecution;
