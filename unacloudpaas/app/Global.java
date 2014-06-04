@@ -4,6 +4,7 @@ import models.enums.MultiplicityType;
 import models.enums.ResourceType;
 import play.*;
 import play.libs.*;
+import unacloud.paas.monitor.VirtualMachineMonitor;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,15 @@ public class Global extends GlobalSettings {
     
     public void onStart(Application app) {
         InitialData.insert(app);
+        VirtualMachineMonitor.startMonitor();
     }
-    
+
+    @Override
+    public void onStop(Application application) {
+        super.onStop(application);
+        VirtualMachineMonitor.stopMonitor();
+    }
+
     static class InitialData {
         
         public static void insert(Application app) {
@@ -81,6 +89,7 @@ public class Global extends GlobalSettings {
                 Ebean.save(all.get("users"));
 
             }
+
         }
         
     }
