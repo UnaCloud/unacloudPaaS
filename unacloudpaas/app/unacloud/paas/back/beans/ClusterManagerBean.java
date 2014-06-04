@@ -88,7 +88,7 @@ public class ClusterManagerBean {
             LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), "platform", "Configuring platform... "+tot));
             System.out.println("Configuring platform...");
 
-            if(platformExecution.getPlatform().getId()==1){
+            if(platformExecution.getPlatform().getName().equalsIgnoreCase("mpi")){
                 try(PrintWriter pw=new PrintWriter(new File(PLATFORMS_FOLDER, "/"+Long.toHexString(platformExecution.getId())+"/machinesFile"))){
                     for(RolExecution re : platformExecution.getRolExecution()){
                         for(Node node : re.getNodes()){
