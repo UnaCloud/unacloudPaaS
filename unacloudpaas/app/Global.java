@@ -64,9 +64,9 @@ public class Global extends GlobalSettings {
                     mpiExecRole.puppetModule=pmuMpi;
                 }
 
-                pMpi.mainCommand=new MainCommand("mpirun -n $exec.cores -hostfile machinesFile",MultiplicityType.ONE, ResourceType.LOCAL,null,mpiExecRole.id);
-                pCondor.mainCommand=new MainCommand("condor_submit",MultiplicityType.ONE, ResourceType.LOCAL,"daemon",condorMasterRole.id);
-                pShell.mainCommand=new MainCommand("sh",MultiplicityType.MANY, ResourceType.LOCAL,"daemon",shellExecRole.id);
+                pMpi.mainCommand=new MainCommand("mpirun -n $exec.cores -hostfile machinesFile",MultiplicityType.ONE, ResourceType.GLOBAL,null,mpiExecRole.id);
+                pCondor.mainCommand=new MainCommand("condor_submit",MultiplicityType.ONE, ResourceType.GLOBAL,"daemon",condorMasterRole.id);
+                pShell.mainCommand=new MainCommand("sh",MultiplicityType.MANY, ResourceType.GLOBAL,"daemon",shellExecRole.id);
 
 
                 System.out.println("El comando es "+pShell.mainCommand.command);
