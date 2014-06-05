@@ -1,9 +1,20 @@
-@()
+@(count: Integer,platforms: List[PlatformExecution])
 
 @import helper._
 
 @main(title = "The 'helloworld' application",menuId="historyBtn") {
     
-    <h1>Welcome:</h1>
-    Some statistics
+    <h1>Run history:</h1>
+        <br/>
+        <table class="table">
+            <tr><th>Name</th><th>Start time</th><th>Status</th><th>End time</th></tr>
+            @platforms.map { plat =>
+                <tr>
+                    <td>@plat.runName</td>
+                    <td>@plat.startTime.format("HH:mm dd/MM/yyyy")</td>
+                    <td>@plat.status</td>
+                    <td>@plat.endTime</td>
+                </tr>
+            }
+        </table>
 }

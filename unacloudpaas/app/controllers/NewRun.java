@@ -42,10 +42,6 @@ public class NewRun extends Controller {
         return ok(running.render());
     }
 
-    public static Result runningHistory() {
-        return ok(runningHistory.render());
-    }
-
     public static Result start(){
         long userId=1;
         Map<String,String> data=Form.form().bindFromRequest().data();

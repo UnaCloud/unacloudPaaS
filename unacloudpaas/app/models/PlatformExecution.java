@@ -20,6 +20,7 @@ public class PlatformExecution  extends Model {
     public String runName;
     public String mainCommandArgs;
     public Date startTime;
+    public Date endTime;
     public Boolean eternal;
     public ExecutionState status;
     @ManyToOne

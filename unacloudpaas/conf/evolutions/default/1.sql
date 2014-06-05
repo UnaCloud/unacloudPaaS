@@ -5,12 +5,12 @@
 
 create table command (
   id                        bigint auto_increment not null,
+  rol_execution_id          bigint not null,
   command                   varchar(255),
   multiplicity              integer,
   running_user              varchar(255),
   type                      integer,
   main_command              tinyint(1) default 0,
-  rol_execution_id          bigint,
   constraint ck_command_multiplicity check (multiplicity in (0,1,2)),
   constraint ck_command_type check (type in (0,1)),
   constraint pk_command primary key (id))
@@ -30,7 +30,7 @@ create table execution_log (
   id_node_log               bigint,
   time                      datetime,
   component                 varchar(255),
-  message                   varchar(255),
+  message                   text,
   platform_execution_id     bigint,
   constraint pk_execution_log primary key (id))
 ;
@@ -76,6 +76,7 @@ create table platform_execution (
   run_name                  varchar(255),
   main_command_args         varchar(255),
   start_time                datetime,
+  end_time                  datetime,
   eternal                   tinyint(1) default 0,
   status                    integer,
   user_user_id              bigint,
@@ -177,8 +178,8 @@ create table user_grupo (
   grupo_groupname                varchar(255) not null,
   constraint pk_user_grupo primary key (user_user_id, grupo_groupname))
 ;
-alter table command add constraint fk_command_rolExecution_1 foreign key (rol_execution_id) references rol_execution (id) on delete restrict on update restrict;
-create index ix_command_rolExecution_1 on command (rol_execution_id);
+alter table command add constraint fk_command_rol_execution_1 foreign key (rol_execution_id) references rol_execution (id) on delete restrict on update restrict;
+create index ix_command_rol_execution_1 on command (rol_execution_id);
 alter table command_wait add constraint fk_command_wait_node_2 foreign key (node_id) references node (id) on delete restrict on update restrict;
 create index ix_command_wait_node_2 on command_wait (node_id);
 alter table node add constraint fk_node_rolExecution_3 foreign key (rol_execution_id) references rol_execution (id) on delete restrict on update restrict;

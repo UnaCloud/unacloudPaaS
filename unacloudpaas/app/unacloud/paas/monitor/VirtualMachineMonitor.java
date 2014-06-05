@@ -41,9 +41,7 @@ public class VirtualMachineMonitor extends Thread {
 
     @Override
     public void run() {
-        Set<Long> failedPlaftorms = new HashSet<>();
-        while (test) {
-            failedPlaftorms.clear();
+        for(Set<Long> failedPlaftorms = new HashSet<>();test;failedPlaftorms.clear()){
             PaaSUtils.sleep(((System.currentTimeMillis() / WAIT_TIME) + 1) * WAIT_TIME - System.currentTimeMillis());
             List<PlatformExecution> platforms = getUsedVirtualMachines();
             if (!platforms.isEmpty()) {
@@ -91,7 +89,7 @@ public class VirtualMachineMonitor extends Thread {
             }
         }
         for (Node node : changes) {
-            SqlUpdate update=Ebean.createSqlUpdate("UPDATE Node n SET n.maxSecuentialFailCount = "+node.getMaxSecuentialFailCount()+" WHERE n.id = "+node.getId());
+            SqlUpdate update=Ebean.createSqlUpdate("UPDATE Node SET maxSecuentialFailCount = "+node.getMaxSecuentialFailCount()+" WHERE id = "+node.getId());
             update.execute();
         }
     }
