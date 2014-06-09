@@ -1,8 +1,8 @@
 package unacloud.paas.back.sshutils;
 
+import models.ExecutionLog;
 import models.Node;
 import unacloud.paas.back.beans.LogManagerBean;
-import unacloud.paas.back.execution.entities.RuntimeExecutionLog;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,7 +16,7 @@ public class SSHCommandNoWait extends ProcessManager {
     private final int processSize;
     private Node dest;
 
-    public SSHCommandNoWait(Node dest, String command, RuntimeExecutionLog log, int processSize) {
+    public SSHCommandNoWait(Node dest, String command, ExecutionLog log, int processSize) {
         super(log, "ssh root@" + dest.getIpAddress() + " " + command);
         this.processSize = processSize;
         this.dest = dest;

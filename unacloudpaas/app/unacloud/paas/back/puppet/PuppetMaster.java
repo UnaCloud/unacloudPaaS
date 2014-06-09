@@ -1,10 +1,10 @@
 package unacloud.paas.back.puppet;
 
+import models.ExecutionLog;
 import models.Node;
 import models.PlatformExecution;
 import models.RolExecution;
 import unacloud.paas.back.execution.RuntimeRoleExecutionBean;
-import unacloud.paas.back.execution.entities.RuntimeExecutionLog;
 import unacloud.paas.back.sshutils.ProcessManager;
 import unacloud.paas.back.sshutils.SSHCommand;
 import unacloud.paas.back.utils.PaaSUtils;
@@ -75,7 +75,7 @@ public class PuppetMaster{
       }
       for(RolExecution role : platform.getRolExecution()){
          for(Node d : role.getNodes()){
-            new SSHCommand(d, "echo \"certname="+d.getHostname().toLowerCase()+"\" >> /etc/puppet/puppet.conf", new RuntimeExecutionLog(platform.getId(), "node:"+d.getHostname())).waitFor();
+            new SSHCommand(d, "echo \"certname="+d.getHostname().toLowerCase()+"\" >> /etc/puppet/puppet.conf", new ExecutionLog(platform.getId(), d.getId(), "node:"+d.getHostname())).waitFor();
          }
       }
       for(RolExecution role : platform.getRolExecution()){
@@ -86,11 +86,11 @@ public class PuppetMaster{
       for(int e=0;e<nodeNames.size();e++){
          nodeList+=" "+(nodeNames.get(e).toLowerCase());
          if(e>0&&e%10==0){
-            new ProcessManager(new RuntimeExecutionLog(platform.getId(),"puppetMaster"), "puppet cert sign"+nodeList).waitFor();
+            new ProcessManager(new ExecutionLog(platform.getId(), null,"puppetMaster"), "puppet cert sign"+nodeList).waitFor();
             nodeList="";
          }
       }
-      if(!nodeList.isEmpty())new ProcessManager(new RuntimeExecutionLog(platform.getId(),"puppetMaster"), "puppet cert sign"+nodeList).waitFor();
+      if(!nodeList.isEmpty())new ProcessManager(new ExecutionLog(platform.getId(), null,"puppetMaster"), "puppet cert sign"+nodeList).waitFor();
       System.out.println("puppetMaster "+ nodeList);
       for(RolExecution role : platform.getRolExecution()){
           RuntimeRoleExecutionBean.executeCommandOnRole(platform, role, "puppet agent --test",5000);

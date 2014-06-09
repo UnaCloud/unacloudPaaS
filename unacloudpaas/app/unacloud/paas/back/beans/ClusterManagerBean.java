@@ -76,7 +76,7 @@ public class ClusterManagerBean {
         FolderManager.createPlatformFolder(platformExecution.getId());
 
         try{
-            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), "platform", "Starting platform..."));
+            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Starting platform..."));
             System.out.println("StartingPlatform");
             DeployedCluster deployedCluster=RuntimePlatformExecutionBean.startPlatform(platformExecution);
 
@@ -85,7 +85,7 @@ public class ClusterManagerBean {
 
             System.out.println("StartedPlatform:1");
             int tot=0;for(RolExecution rol:platformExecution.getRolExecution())tot+=rol.getNodes().size();
-            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), "platform", "Configuring platform... "+tot));
+            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Configuring platform... "+tot));
             System.out.println("Configuring platform...");
 
             if(platformExecution.getPlatform().getName().equalsIgnoreCase("mpi")){
@@ -117,11 +117,11 @@ public class ClusterManagerBean {
                 }
             }
             RuntimePlatformExecutionBean.configurePlatform(platformExecution);
-            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), "platform", "Executing commands..."));
+            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Executing commands..."));
             RuntimePlatformExecutionBean.executeCommands(platformExecution);
-            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), "platform", "Executing commands 2..."));
+            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Executing commands 2..."));
             PlatformExecutionManagerBean.updatePlatformExecutionState(platformExecution.getId(), ExecutionState.RUNNING);
-            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), "platform", "Running..."));
+            LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Running..."));
         }catch(Throwable ex){
             ex.printStackTrace();
             stopCluster(platformExecution.getId(), ExecutionState.FAILED);
@@ -147,7 +147,7 @@ public class ClusterManagerBean {
     }
    public static void stopCluster(long platformExecutionId, ExecutionState state){
       PlatformExecutionManagerBean.updatePlatformExecutionState(platformExecutionId, state);
-      LogManagerBean.storeLog(new ExecutionLog(platformExecutionId, "platform", "Stopping "+state+"..."));
+      LogManagerBean.storeLog(new ExecutionLog(platformExecutionId, null, "platform", "Stopping "+state+"..."));
       List<Node> nodes=new ArrayList<>();
       for(RolExecution rol:PlatformExecutionManagerBean.getPlatformExecution(platformExecutionId).getRolExecution()){
           nodes.addAll(rol.getNodes());

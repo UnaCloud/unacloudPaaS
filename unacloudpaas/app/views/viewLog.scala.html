@@ -1,0 +1,21 @@
+@(logs: List[ExecutionLog])
+
+@import helper._
+
+@main(title = "UnaCloud PaaS - PlatLog",menuId="historyBtn") {
+    
+    <h1>Run history:</h1>
+        <br/>
+        <table class="table">
+            <tr><th>Name</th><th>Start time</th><th>Status</th><th>End time</th></tr>
+            @logs.map { log =>
+                <tr>
+                    <td>@log.id</td>
+                    <td>@log.time.format("HH:mm dd/MM/yyyy")</td>
+                    <td>@log.idNodeLog</td>
+                    <td>@log.component</td>
+                    <td>@log.message</td>
+                </tr>
+            }
+        </table>
+}

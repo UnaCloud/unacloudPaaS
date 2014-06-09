@@ -1,15 +1,15 @@
 package unacloud.paas.back.sshutils;
 
+import models.ExecutionLog;
 import unacloud.paas.back.beans.LogManagerBean;
-import unacloud.paas.back.execution.entities.RuntimeExecutionLog;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 public class ProcessManager{
     Process p;
-    RuntimeExecutionLog log;
-    public ProcessManager(RuntimeExecutionLog log, String command){
+    ExecutionLog log;
+    public ProcessManager(ExecutionLog log, String command){
         this.log=log;
         try{
             System.out.println("Exec: "+command);

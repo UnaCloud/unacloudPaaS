@@ -28,10 +28,10 @@ create table command_wait (
 create table execution_log (
   id                        bigint auto_increment not null,
   id_node_log               bigint,
+  platform_execution_id     bigint,
   time                      datetime,
   component                 varchar(255),
   message                   text,
-  platform_execution_id     bigint,
   constraint pk_execution_log primary key (id))
 ;
 

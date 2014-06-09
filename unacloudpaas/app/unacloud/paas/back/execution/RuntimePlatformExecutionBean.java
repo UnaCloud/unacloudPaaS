@@ -2,9 +2,9 @@ package unacloud.paas.back.execution;
 
 import models.Node;
 import models.PlatformExecution;
+import models.ExecutionLog;
 import models.RolExecution;
 import models.SSHSharedKey;
-import unacloud.paas.back.execution.entities.RuntimeExecutionLog;
 import unacloud.paas.back.iaasservices.ClusterServices;
 import unacloud.paas.back.iaasservices.DeployedCluster;
 import unacloud.paas.back.local.LocalHostTableManager;
@@ -56,7 +56,7 @@ public class RuntimePlatformExecutionBean{
                pw.println(content);
             }catch(Exception e2){
             }
-            copias.add(new SCP(temp, d, "/root/.ssh/id_rsa.pub", new RuntimeExecutionLog(plaformConfiguration.getId(), "node:"+d.getHostname())));
+            copias.add(new SCP(temp, d, "/root/.ssh/id_rsa.pub", new ExecutionLog(plaformConfiguration.getId(), null, "node:"+d.getHostname())));
          }
       }
       for(SCP copy : copias){

@@ -5,7 +5,6 @@ import models.enums.MultiplicityType;
 import models.enums.ResourceType;
 import unacloud.paas.back.beans.PlatformExecutionManagerBean;
 import unacloud.paas.back.dsl.Parser;
-import unacloud.paas.back.execution.entities.RuntimeExecutionLog;
 import unacloud.paas.back.puppet.PuppetModuleInstance;
 import unacloud.paas.back.sshutils.SCP;
 import unacloud.paas.back.sshutils.SSHCommand;
@@ -39,7 +38,7 @@ public class RuntimeRoleExecutionBean {
     public static void sendFileToRole(PlatformExecution plaformConfiguration,RolExecution roleConfiguration,File f, String path) {
         SCP[] copias = new SCP[roleConfiguration.getNodes().size()];
         for (int e = 0; e < copias.length; e++) {
-            copias[e] = new SCP(f, roleConfiguration.getNodes().get(e), path, new RuntimeExecutionLog(plaformConfiguration.getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()));
+            copias[e] = new SCP(f, roleConfiguration.getNodes().get(e), path, new ExecutionLog(plaformConfiguration.getId(), roleConfiguration.getNodes().get(e).getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()));
         }
         for (SCP copia : copias) {
             copia.waitFor();
@@ -49,7 +48,7 @@ public class RuntimeRoleExecutionBean {
     public static void executeCommandOnRole(PlatformExecution plaformConfiguration,RolExecution roleConfiguration,String command){
         SSHCommand[] copias = new SSHCommand[roleConfiguration.getNodes().size()];
         for (int e = 0; e < copias.length; e++) {
-            copias[e] = new SSHCommand(roleConfiguration.getNodes().get(e), command, new RuntimeExecutionLog(plaformConfiguration.getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()));
+            copias[e] = new SSHCommand(roleConfiguration.getNodes().get(e), command, new ExecutionLog(plaformConfiguration.getId(), roleConfiguration.getNodes().get(e).getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()));
         }
         for (SSHCommand copia : copias) {
             if (copia != null) {
@@ -60,7 +59,7 @@ public class RuntimeRoleExecutionBean {
     public static SSHCommandNoWait[] executeAsynchronusCommandOnRole(PlatformExecution plaformConfiguration,RolExecution roleConfiguration,String command, int processSize){
         SSHCommandNoWait[] copias = new SSHCommandNoWait[roleConfiguration.getNodes().size()];
         for (int e = 0; e < copias.length; e++) {
-            copias[e] = new SSHCommandNoWait(roleConfiguration.getNodes().get(e), command, new RuntimeExecutionLog(plaformConfiguration.getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()),1);
+            copias[e] = new SSHCommandNoWait(roleConfiguration.getNodes().get(e), command, new ExecutionLog(plaformConfiguration.getId(), roleConfiguration.getNodes().get(e).getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()),1);
         }
         for (int e = 0; e < copias.length; e++) {
             if (copias[e] != null) {
@@ -73,7 +72,7 @@ public class RuntimeRoleExecutionBean {
     public static void executeCommandOnRole(PlatformExecution plaformConfiguration,RolExecution roleConfiguration,String command, long timeWait) {
         SSHCommand[] copias = new SSHCommand[roleConfiguration.getNodes().size()];
         for (int e = 0; e < copias.length; e++) {
-            copias[e] = new SSHCommand(roleConfiguration.getNodes().get(e), command, new RuntimeExecutionLog(plaformConfiguration.getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()));
+            copias[e] = new SSHCommand(roleConfiguration.getNodes().get(e), command, new ExecutionLog(plaformConfiguration.getId(), roleConfiguration.getNodes().get(e).getId(), "node:" + roleConfiguration.getNodes().get(e).getHostname()));
             PaaSUtils.sleep(timeWait);
         }
         for (SSHCommand copia : copias) {
@@ -137,7 +136,7 @@ public class RuntimeRoleExecutionBean {
             System.out.println("Multiplicity "+command.getMultiplicity());
             if (command.getMultiplicity() == MultiplicityType.ONE) {
                 Node d = roleConfiguration.getNodes().get(new Random().nextInt(roleConfiguration.getNodes().size()));
-                SSHCommandNoWait commandWait = new SSHCommandNoWait(d, "sh " + path + "/unacloudStart.sh", new RuntimeExecutionLog(plaformConfiguration.getId(), "CommandRunner:" + roleConfiguration.getRol().getName()), 1);
+                SSHCommandNoWait commandWait = new SSHCommandNoWait(d, "sh " + path + "/unacloudStart.sh", new ExecutionLog(plaformConfiguration.getId(), null, "CommandRunner:" + roleConfiguration.getRol().getName()), 1);
                 commandWait.waitFor();
                 for (Long l : commandWait.getProcessIds()) {
                     PlatformExecutionManagerBean.addCommandWait(d.getId(), l);
