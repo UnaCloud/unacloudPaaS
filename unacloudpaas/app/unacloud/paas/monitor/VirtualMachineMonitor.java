@@ -41,14 +41,14 @@ public class VirtualMachineMonitor extends Thread {
 
     @Override
     public void run() {
-        for(Set<Long> failedPlaftorms = new HashSet<>();test;failedPlaftorms.clear()){
+        for(Set<Long> failedPlatforms = new HashSet<>();test;failedPlatforms.clear()){
             PaaSUtils.sleep(((System.currentTimeMillis() / WAIT_TIME) + 1) * WAIT_TIME - System.currentTimeMillis());
             List<PlatformExecution> platforms = Ebean.find(PlatformExecution.class).where(Expr.and(Expr.eq("eternal",false),Expr.eq("status",ExecutionState.RUNNING))).findList();
             if (!platforms.isEmpty()) {
                 System.out.println("- Revisando "+platforms.size()+" plataformas");
                 checkFailure(platforms);
                 checkTermination(platforms);
-            }else System.out.println("- No hay plataformas");
+            }
         }
     }
 
@@ -62,8 +62,9 @@ public class VirtualMachineMonitor extends Thread {
                     if (node.getMaxSecuentialFailCount() >= MAX_FAIL) {
                         failedNodes.add(node);
                     }
-                }
+                }//TODO arreglar esto
                 if (!failedNodes.isEmpty()) {
+                    System.out.println("Falló un nodo");
                     platforms.remove(p--);
                     FailureRecoveryManager.onMachineFailure(platform.getId(), failedNodes);
                 }
@@ -97,7 +98,8 @@ public class VirtualMachineMonitor extends Thread {
 
     private void checkTermination(List<PlatformExecution> platforms) {
         for (PlatformExecution platform : platforms) {
-            if (platform.getPlatform().getWaiterClass() != null) {
+            System.out.println(platform.getPlatform().getWaiterClass());
+            if(platform.getPlatform().getWaiterClass() != null) {
                 WaiterManager.checkTermination(platform);
             }
         }

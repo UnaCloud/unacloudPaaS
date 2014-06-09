@@ -10,12 +10,11 @@ public class WaiterManager{
    private static final Map<String, Waiter> waiters=new TreeMap<>();
    public static void checkTermination(final PlatformExecution platform){
       if(platform!=null&&platform.getPlatform().getWaiterClass()!=null){
-         Waiter w=getWaiter(platform.getPlatform().getWaiterClass());
-         if(w!=null){
-            if(w.hasEnded(platform)){
-               PlatformSucessManager.onPlatformSucess(platform.getId());
+            Waiter w=getWaiter(platform.getPlatform().getWaiterClass());
+            System.out.println("Waiter: "+w+" "+platform.getPlatform().getWaiterClass());
+            if(w!=null&&w.hasEnded(platform)){
+                PlatformSucessManager.onPlatformSucess(platform.getId());
             }
-         }
       }
    }
    private static Waiter getWaiter(final String name){
