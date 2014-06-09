@@ -36,11 +36,6 @@ public class SSHCommandNoWait extends ProcessManager {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()))) {
-            for(String h;(h=br.readLine())!=null;)log.appendLine(h);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
         LogManagerBean.storeStaticLog(log);
         p.destroy();
     }
