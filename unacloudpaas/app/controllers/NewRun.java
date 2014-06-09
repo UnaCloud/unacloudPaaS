@@ -1,9 +1,12 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.Expr;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.MainCommand;
 import models.Platform;
+import models.PlatformExecution;
+import models.enums.ExecutionState;
 import models.enums.ResourceType;
 import play.*;
 import play.libs.Json;
@@ -16,6 +19,7 @@ import unacloud.paas.data.execution.FileDescriptionEntity;
 import unacloud.paas.data.execution.RolDescription;
 import views.html.*;
 
+import java.beans.Expression;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,6 +41,9 @@ public class NewRun extends Controller {
         MainCommand c=Ebean.find(MainCommand.class,plat.mainCommand.id);
         if(plat==null)return badRequest("Error");
         return ok(newRunConfig.render(plat));
+    }
+    public static int runningCount(){
+        return PlatformExecution.find.where(Expr.in("status",new ExecutionState[]{ExecutionState.CREATING,ExecutionState.RUNNING})).findRowCount();
     }
     public static Result runningList() {
         return ok(running.render());

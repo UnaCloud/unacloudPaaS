@@ -49,7 +49,7 @@
                     <li>My Cloud</li>
                     <li @if(menuId=="btnHome"){class="active"}><a id="btnHome" href="@routes.Home.index()">Home</a></li>
                     <li @if(menuId=="newRunBtn"){class="active"}><a id="newRunBtn" href="@routes.NewRun.index()">New Run</a></li>
-                    <li @if(menuId=="runningBtn"){class="active"}><a id="runningBtn" href="@routes.NewRun.runningList()">Running (0)</a></li>
+                    <li @if(menuId=="runningBtn"){class="active"}><a id="runningBtn" href="@routes.NewRun.runningList()">Running (@controllers.NewRun.runningCount())</a></li>
                     <li @if(menuId=="historyBtn"){class="active"}><a id="historyBtn" href="@routes.RunHistory.runningHistory()">Running history</a></li>
                     <li @if(menuId=="filesBtn"){class="active"}><a id="filesBtn" href="@routes.Files.index()">My files</a></li>
                     <li>My Account</li>

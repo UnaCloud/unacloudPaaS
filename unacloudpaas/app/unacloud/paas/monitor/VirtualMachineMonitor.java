@@ -43,11 +43,12 @@ public class VirtualMachineMonitor extends Thread {
     public void run() {
         for(Set<Long> failedPlaftorms = new HashSet<>();test;failedPlaftorms.clear()){
             PaaSUtils.sleep(((System.currentTimeMillis() / WAIT_TIME) + 1) * WAIT_TIME - System.currentTimeMillis());
-            List<PlatformExecution> platforms = getUsedVirtualMachines();
+            List<PlatformExecution> platforms = Ebean.find(PlatformExecution.class).where(Expr.and(Expr.eq("eternal",false),Expr.eq("status",ExecutionState.RUNNING))).findList();
             if (!platforms.isEmpty()) {
+                System.out.println("- Revisando "+platforms.size()+" plataformas");
                 checkFailure(platforms);
                 checkTermination(platforms);
-            }
+            }else System.out.println("- No hay plataformas");
         }
     }
 
@@ -101,12 +102,5 @@ public class VirtualMachineMonitor extends Thread {
             }
         }
 
-    }
-
-    private List<PlatformExecution> getUsedVirtualMachines() {
-        return Ebean.find(PlatformExecution.class).where(Expr.eq("eternal",false)).findList();
-        /*TypedQuery<PlatformExecution> query = entityManager.createNamedQuery("PlatformExecution.findByEternal", PlatformExecution.class);
-        query.setParameter("state", ExecutionState.RUNNING);
-        return query.getResultList();*/
     }
 }
