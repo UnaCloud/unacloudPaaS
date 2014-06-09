@@ -27,6 +27,7 @@ public class SSHCommandNoWait extends ProcessManager {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
             for (int e = 0; e < processSize; e++) {
                 String h = br.readLine();
+                log.appendLine(h);
                 if (h != null && h.matches("[0-9]+")) {
                     processIds.add(Long.parseLong(h));
                 }
@@ -35,14 +36,10 @@ public class SSHCommandNoWait extends ProcessManager {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        if (processIds.size() != processSize) {
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
-                for (String h; (h = br.readLine()) != null;) {
-                    log.appendLine(h);
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()))) {
+            for(String h;(h=br.readLine())!=null;)log.appendLine(h);
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
         LogManagerBean.storeStaticLog(log);
         p.destroy();
