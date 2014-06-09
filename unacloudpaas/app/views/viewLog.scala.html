@@ -7,11 +7,17 @@
     <h1>Run history:</h1>
         <br/>
         <table class="table">
-            <tr><th>Name</th><th>Start time</th><th>Status</th><th>End time</th></tr>
+            <tr><th>Log id</th><th>Time</th><th>Component id</th><th>Component</th><th>Message</th></tr>
             @logs.map { log =>
                 <tr>
                     <td>@log.id</td>
-                    <td>@log.time.format("HH:mm dd/MM/yyyy")</td>
+                    <td>
+                        @if(log.time == null){
+                            -
+                        }else{
+                            @log.time.format("HH:mm dd/MM/yyyy")
+                        }
+                    </td>
                     <td>@log.idNodeLog</td>
                     <td>@log.component</td>
                     <td>@log.message</td>
