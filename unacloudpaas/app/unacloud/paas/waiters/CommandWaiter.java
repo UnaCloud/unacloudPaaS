@@ -38,8 +38,8 @@ public class CommandWaiter implements Waiter{
                                 Long PID=Long.parseLong(j[0]);
                                 for(CommandWait cw : node.getWaitingCommands()){
                                     if(cw.getProcessId()==PID){
-                                    cw.status=ExecutionState.RUNNING;
-                                }
+                                        cw.status=ExecutionState.RUNNING;
+                                    }
                                 }
                             }
                         }
@@ -57,27 +57,29 @@ public class CommandWaiter implements Waiter{
             }
          }
       }
-      boolean complete=true;
-      try/*(Connection con=DatabaseConnection.getConnection(); PreparedStatement ps=con.prepareStatement("update `unacloudpaas`.`commandWait` set `commandWait`.`executionState_state`=? where `commandWait`.`processId`=? and `commandWait`.`idNode`=?;"))*/{
-         for(RolExecution role : platform.rolExecution){
-            for(Node node : role.getNodes()){
-               System.out.println(" "+node.getHostname()+" "+node.waitingCommands.size());
-               for(CommandWait cw : node.waitingCommands){
-                  if(cw.status==ExecutionState.SUCCESS){
-                     LogManagerBean.storeLog(new ExecutionLog(platform.getId(), node.getId(),node.getHostname(), "Command " + cw.getProcessId() + " success"));
-                     /*ps.setInt(1, ExecutionState.SUCCESS.getId());
-                     ps.setLong(2, cw.getProcessId());
-                     ps.setLong(3, cw.getNodeId());
-                     ps.executeUpdate();*/
-                  }else{
-                     complete=false;
-                  }
-               }
+        boolean complete=true;
+        try/*(Connection con=DatabaseConnection.getConnection(); PreparedStatement ps=con.prepareStatement("update `unacloudpaas`.`commandWait` set `commandWait`.`executionState_state`=? where `commandWait`.`processId`=? and `commandWait`.`idNode`=?;"))*/{
+            for(RolExecution role : platform.rolExecution){
+                for(Node node : role.getNodes()){
+                    System.out.println(" "+node.getHostname()+" "+node.waitingCommands.size());
+                    for(CommandWait cw : node.waitingCommands){
+                        System.out.println("  "+cw.getId()+" "+cw.status);
+                        if(cw.status==ExecutionState.SUCCESS){
+                            LogManagerBean.storeLog(new ExecutionLog(platform.getId(), node.getId(),node.getHostname(), "Command " + cw.getProcessId() + " success"));
+                            /*ps.setInt(1, ExecutionState.SUCCESS.getId());
+                            ps.setLong(2, cw.getProcessId());
+                            ps.setLong(3, cw.getNodeId());
+                            ps.executeUpdate();*/
+                        }else{
+                            complete=false;
+                        }
+                    }
+                }
             }
-         }
-      }catch(Exception ex){
-         ex.printStackTrace();
-      }
-      return complete;
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        System.out.println("Complete = "+complete);
+        return complete;
    }
 }
