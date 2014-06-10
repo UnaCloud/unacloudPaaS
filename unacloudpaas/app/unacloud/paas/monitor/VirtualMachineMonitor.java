@@ -66,7 +66,7 @@ public class VirtualMachineMonitor extends Thread {
                 if (!failedNodes.isEmpty()) {
                     System.out.println("Falló un nodo");
                     platforms.remove(p--);
-                    FailureRecoveryManager.onMachineFailure(platform.getId(), failedNodes);
+                    FailureRecoveryManager.onMachineFailure(platform, failedNodes);
                 }
             }
         }

@@ -1,6 +1,8 @@
 package unacloud.paas.waiters;
 
 import models.PlatformExecution;
+import models.enums.ExecutionState;
+import unacloud.paas.back.beans.ClusterManagerBean;
 import unacloud.paas.failrecovery.PlatformSucessManager;
 
 import java.lang.reflect.InvocationTargetException;
@@ -8,12 +10,12 @@ import java.util.Map;
 import java.util.TreeMap;
 public class WaiterManager{
    private static final Map<String, Waiter> waiters=new TreeMap<>();
-   public static void checkTermination(final PlatformExecution platform){
-      if(platform!=null&&platform.getPlatform().getWaiterClass()!=null){
-            Waiter w=getWaiter(platform.getPlatform().getWaiterClass());
-            System.out.println("Waiter: "+w+" "+platform.getPlatform().getWaiterClass());
-            if(w!=null&&w.hasEnded(platform)){
-                PlatformSucessManager.onPlatformSucess(platform.getId());
+   public static void checkTermination(final PlatformExecution platformExecution){
+      if(platformExecution!=null&&platformExecution.getPlatform().getWaiterClass()!=null){
+            Waiter w=getWaiter(platformExecution.getPlatform().getWaiterClass());
+            System.out.println("Waiter: "+w+" "+platformExecution.getPlatform().getWaiterClass());
+            if(w!=null&&w.hasEnded(platformExecution)){
+                new ClusterManagerBean().stopCluster(platformExecution, ExecutionState.SUCCESS);
             }
       }
    }
