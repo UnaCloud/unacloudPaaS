@@ -17,6 +17,7 @@ import java.util.List;
 public class PlatformExecution  extends Model {
     @Id
     public Long id;
+    public long clusterExecutionId;
     public String runName;
     public String mainCommandArgs;
     public Date startTime;

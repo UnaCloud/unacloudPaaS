@@ -81,7 +81,9 @@ public class ClusterManagerBean {
             DeployedCluster deployedCluster=RuntimePlatformExecutionBean.startPlatform(platformExecution);
 
             System.out.println("StartedPlatform ");
+            platformExecution.clusterExecutionId=deployedCluster.getId();
             platformExecution=insertNodesIntoRoles(platformExecution, deployedCluster);
+
 
             System.out.println("StartedPlatform:1");
             int tot=0;for(RolExecution rol:platformExecution.getRolExecution())tot+=rol.getNodes().size();
@@ -124,7 +126,7 @@ public class ClusterManagerBean {
             LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Running..."));
         }catch(Throwable ex){
             ex.printStackTrace();
-            stopCluster(platformExecution.getId(), ExecutionState.FAILED);
+            stopCluster(platformExecution, ExecutionState.FAILED);
         }
    }
    private static PlatformExecution insertNodesIntoRoles(PlatformExecution platformExecution, DeployedCluster deployedCluster){
@@ -145,16 +147,16 @@ public class ClusterManagerBean {
        Ebean.save(platformExecution);
         return platformExecution;
     }
-   public static void stopCluster(long platformExecutionId, ExecutionState state){
-      PlatformExecutionManagerBean.updatePlatformExecutionState(platformExecutionId, state);
-      LogManagerBean.storeLog(new ExecutionLog(platformExecutionId, null, "platform", "Stopping "+state+"..."));
+   public static void stopCluster(PlatformExecution platformExecution, ExecutionState state){
+      PlatformExecutionManagerBean.updatePlatformExecutionState(platformExecution.id, state);
+      LogManagerBean.storeLog(new ExecutionLog(platformExecution.id, null, "platform", "Stopping "+state+"..."));
       List<Node> nodes=new ArrayList<>();
-      for(RolExecution rol:PlatformExecutionManagerBean.getPlatformExecution(platformExecutionId).getRolExecution()){
+      for(RolExecution rol:PlatformExecutionManagerBean.getPlatformExecution(platformExecution.id).getRolExecution()){
           nodes.addAll(rol.getNodes());
       }
       if(!nodes.isEmpty()){
          PuppetMaster.stopPuppetCluster(nodes);
-         ClusterServices.stopCluster(1);
+         ClusterServices.stopCluster((int)platformExecution.clusterExecutionId);
       }
    }
 }
