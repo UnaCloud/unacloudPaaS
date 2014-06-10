@@ -2,10 +2,7 @@ package models;
 
 import play.db.ebean.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.nio.charset.Charset;
 import java.util.Date;
 
@@ -16,6 +13,7 @@ public class ExecutionLog  extends Model {
     public Long idNodeLog;
     public long platformExecutionId;
 
+    @Temporal(TemporalType.TIMESTAMP)
     public Date time;
     public String component;
     @Column(columnDefinition = "text")
@@ -59,6 +57,7 @@ public class ExecutionLog  extends Model {
     }
 
     public void doFinal(){
+        time=new Date();
         if(messageBuilder!=null){
             message=messageBuilder.toString();
             messageBuilder=null;
