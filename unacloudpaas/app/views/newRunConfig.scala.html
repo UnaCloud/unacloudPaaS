@@ -58,17 +58,16 @@
             <div class="panel-heading"><h3 class="panel-title">Roles</h3></div>
             <div class="panel-body">
                 <table id="roles" class="table">
-                    <tr><th>Rol name</th><th>Multiplicity</th><th>Mount platform folder</th><th>Cores</th><th>Size</th></tr>
+                    <tr><th>Rol name</th><th>Multiplicity</th><th>Mount platform folder</th><th>Modules</th><th>Cores</th><th>Size</th></tr>
                     @for((rol,i) <- platform.roles.zipWithIndex){
                     <tr>
                         <input type="hidden" name="rolId@i" value="@rol.id">
                         <td>@rol.name</td>
                         <td>@rol.multiplicity.id</td>
-                        @if(rol.mountPlatformFolder) {
-                        <td>Yes</td>
-                        }else{
-                        <td>No</td>
-                        }
+                        @if(rol.mountPlatformFolder) {<td>Yes</td>}else{<td>No</td>}
+                        <td>
+
+                        </td>
                         <td>
                             <select name="cores@i" class="select">
                                 <option>1</option>

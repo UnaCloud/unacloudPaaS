@@ -73,6 +73,7 @@ create table platform (
 
 create table platform_execution (
   id                        bigint auto_increment not null,
+  cluster_execution_id      bigint,
   run_name                  varchar(255),
   main_command_args         varchar(255),
   start_time                datetime,

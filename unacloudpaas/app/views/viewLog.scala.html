@@ -7,20 +7,24 @@
     <h1>Run history:</h1>
         <br/>
         <table class="table">
-            <tr><th>Log id</th><th>Time</th><th>Component id</th><th>Component</th><th>Message</th></tr>
+            <tr><th></th><th>Time</th><th><span title="Component id">Id</span></th><th>Component</th><th>Message</th></tr>
             @logs.map { log =>
                 <tr>
                     <td>@log.id</td>
                     <td>
-                        @if(log.time == null){
-                            -
-                        }else{
-                            @log.time.format("HH:mm dd/MM/yyyy")
-                        }
+                        <div style="width: 140px;">@if(log.time == null){-}else{@log.time.format("HH:mm dd/MM/yyyy")}</div>
                     </td>
                     <td>@log.idNodeLog</td>
                     <td>@log.component</td>
-                    <td>@log.message</td>
+                    <td><div style="max-width: 400px;">
+                        @if(log.message.length > 150){<span>@log.message.substring(0,150)</span>
+                        <div style="color: #069;" id="more@log.id" onclick="$(log@log.id).show();$(more@log.id).hide();$(less@log.id).show()">More...</div>
+                        <span style="display: none;" id="log@log.id">@log.message.substring(150)</span>
+                        <div style="display: none;color: #069;" id="less@log.id" onclick="$(log@log.id).hide();$(less@log.id).hide();$(more@log.id).show();">Less...</div>
+                        }else{@log.message}
+
+                        </div>
+                    </td>
                 </tr>
             }
         </table>

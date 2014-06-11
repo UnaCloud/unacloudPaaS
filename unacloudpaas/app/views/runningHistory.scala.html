@@ -7,20 +7,16 @@
     <h1>Run history:</h1>
         <br/>
         <table class="table">
-            <tr><th>Name</th><th>Start time</th><th>Status</th><th>End time</th></tr>
+            <tr><th>Name</th><th>Start time</th><th>Status</th></tr>
             @platforms.map { plat =>
                 <tr>
                     <td>@plat.runName</td>
                     <td>@plat.startTime.format("HH:mm dd/MM/yyyy")</td>
                     <td>@plat.status</td>
-                    <td>@plat.endTime</td>
                     <td >
                         <a href="@routes.RunHistory.executionLog(plat.id)">
                             <span class="glyphicon glyphicon-list-alt"></span>
                         </a>
-                        <button title="View Log" type="button" class="btn btn-default btn-sm">
-
-                        </button>
                     </td>
                 </tr>
             }
