@@ -27,6 +27,7 @@ public class RuntimeRoleExecutionBean {
                 d.puppetModuleInstances.add(instance);
             }
         }
+        System.out.println(roleConfiguration.rol.name+" has "+roleConfiguration.getPuppetModuleUsage().size());
         for (PuppetModuleUsage pmu : roleConfiguration.getPuppetModuleUsage()) {
             PuppetModuleInstance instance = pmu.getpuppetModuleInstance(roleConfiguration,plaformConfiguration);
             for (Node d : roleConfiguration.getNodes()){

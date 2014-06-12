@@ -26,8 +26,24 @@ public class RolDescription {
             this.id = id;
         }
         public List<PuppetParam> roles=new ArrayList<>();
+
+        @Override
+        public String toString() {
+            return "PuppetModule{" +
+                    "id=" + id +
+                    '}';
+        }
     }
     public static class PuppetParam{
 
+    }
+
+    @Override
+    public String toString() {
+        return "RolDescription{" +
+                "cores=" + cores +
+                ", id=" + id +
+                ", size=" + size +
+                '}';
     }
 }
