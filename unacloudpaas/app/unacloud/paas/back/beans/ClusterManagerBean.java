@@ -17,6 +17,7 @@ import unacloud.paas.data.execution.RolDescription;
 import unacloudws.responses.VirtualMachineExecutionWS;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,18 +86,14 @@ public class ClusterManagerBean {
 
         try{
             LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Starting platform..."));
-            System.out.println("StartingPlatform");
             DeployedCluster deployedCluster=RuntimePlatformExecutionBean.startPlatform(platformExecution);
 
-            System.out.println("StartedPlatform ");
             platformExecution.clusterExecutionId=deployedCluster.getId();
             platformExecution=insertNodesIntoRoles(platformExecution, deployedCluster);
 
 
-            System.out.println("StartedPlatform:1");
             int tot=0;for(RolExecution rol:platformExecution.getRolExecution())tot+=rol.getNodes().size();
             LogManagerBean.storeLog(new ExecutionLog(platformExecution.getId(), null, "platform", "Configuring platform... "+tot));
-            System.out.println("Configuring platform...");
 
             if(platformExecution.getPlatform().getName().equalsIgnoreCase("mpi")){
                 try(PrintWriter pw=new PrintWriter(new File(PLATFORMS_FOLDER, "/"+platformExecution.getHexId()+"/machinesFile"))){
@@ -107,12 +104,10 @@ public class ClusterManagerBean {
             }
             if(files!=null){
                 for(FileDescriptionEntity fde : files){
+                    System.out.println("Procesando "+fde.getName());
                     File dest=fde.getPathRespectToExecution(platformExecution);
-                    try(FileOutputStream fos=new FileOutputStream(dest); InputStream is=fde.getContent()){
-                        byte[] buffer=new byte[512];
-                        for(int n; (n=is.read(buffer))!=-1;){
-                            fos.write(buffer, 0, n);
-                        }
+                    try{
+                        Files.copy(fde.getContent(),dest.toPath());
                     }catch(Exception ex){
                         ex.printStackTrace();
                     }
