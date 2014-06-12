@@ -91,8 +91,9 @@ public class VirtualMachineMonitor extends Thread {
             }
         }
         for (Node node : changes) {
-            SqlUpdate update=Ebean.createSqlUpdate("UPDATE Node SET maxSecuentialFailCount = "+node.getMaxSecuentialFailCount()+" WHERE id = "+node.getId());
-            update.execute();
+            node.maxSecuentialFailCount++;
+            Ebean.update(node);//SqlUpdate update=Ebean.createSqlUpdate("UPDATE Node SET maxSecuentialFailCount = "+node.getMaxSecuentialFailCount()+" WHERE id = "+node.getId());
+            //update.execute();
         }
     }
 
