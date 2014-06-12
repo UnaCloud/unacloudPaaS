@@ -78,9 +78,8 @@ public class NewRun extends Controller {
             }catch (IOException ex){}
             fde.setFileType(ResourceType.valueOf(data.get("fileType" + e)));
             fde.setUnzip(fde.getName().endsWith(".zip")&&data.containsKey("fileUnzip"+e)&&data.get("fileUnzip"+e).equals("on"));
-            System.out.println(fde);
+            files.add(fde);
         }
-        System.out.println("createExecution");
         ClusterManagerBean.createExecution(userId, platformId, executionName, commandArgs, roleDescriptions, files);
         return ok(running.render());
     }
