@@ -3,7 +3,6 @@ package unacloud.paas.waiters;
 import models.PlatformExecution;
 import models.enums.ExecutionState;
 import unacloud.paas.back.beans.ClusterManagerBean;
-import unacloud.paas.failrecovery.PlatformSucessManager;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
