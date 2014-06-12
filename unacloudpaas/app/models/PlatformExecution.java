@@ -65,6 +65,10 @@ public class PlatformExecution  extends Model {
 
     public static Finder<Long,PlatformExecution> find = new Finder<Long,PlatformExecution>(Long.class, PlatformExecution.class);
 
+    public String getHexId(){
+        return Long.toHexString(id);
+    }
+
     @Transient
     public VirtualClusterRequest generateClusterRequest(){
         VirtualImageRequest[] images=new VirtualImageRequest[getPlatform().getRoles().size()];

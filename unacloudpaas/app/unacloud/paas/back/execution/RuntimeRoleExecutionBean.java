@@ -88,7 +88,7 @@ public class RuntimeRoleExecutionBean {
         for (Command command : roleConfiguration.getCommands()) {
             StringBuilder script = new StringBuilder("#!/bin/bash\n");
             String path;
-            if (command.getType() == ResourceType.GLOBAL) {
+            if (command.getType() == ResourceType.Global) {
                 path = "/unacloud/cluster";
             } else {
                 path = "/unacloud/node";

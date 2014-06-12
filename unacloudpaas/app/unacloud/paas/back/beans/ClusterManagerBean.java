@@ -99,19 +99,15 @@ public class ClusterManagerBean {
             System.out.println("Configuring platform...");
 
             if(platformExecution.getPlatform().getName().equalsIgnoreCase("mpi")){
-                try(PrintWriter pw=new PrintWriter(new File(PLATFORMS_FOLDER, "/"+Long.toHexString(platformExecution.getId())+"/machinesFile"))){
-                    for(RolExecution re : platformExecution.getRolExecution()){
-                        for(Node node : re.getNodes()){
-                            pw.println(node.getHostname());
-                        }
-                    }
+                try(PrintWriter pw=new PrintWriter(new File(PLATFORMS_FOLDER, "/"+platformExecution.getHexId()+"/machinesFile"))){
+                    for(RolExecution re : platformExecution.getRolExecution())for(Node node : re.getNodes())pw.println(node.getHostname());
                 }catch(FileNotFoundException ex){
                     ex.printStackTrace();
                 }
             }
             if(files!=null){
                 for(FileDescriptionEntity fde : files){
-                    File dest=new File(new File(PLATFORMS_FOLDER, "/"+Long.toHexString(platformExecution.getId())+"/"), fde.getPath()+(fde.getPath().endsWith("/")?"":"/")+fde.getName());
+                    File dest=fde.getPathRespectToExecution(platformExecution);
                     try(FileOutputStream fos=new FileOutputStream(dest); InputStream is=fde.getContent()){
                         byte[] buffer=new byte[512];
                         for(int n; (n=is.read(buffer))!=-1;){

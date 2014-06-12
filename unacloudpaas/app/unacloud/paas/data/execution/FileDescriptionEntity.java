@@ -1,9 +1,14 @@
 package unacloud.paas.data.execution;
 
+import models.PlatformExecution;
 import models.enums.ResourceType;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
+
+import static unacloud.paas.back.user.FolderManager.PLATFORMS_FOLDER;
+
 public class FileDescriptionEntity implements Serializable{
    String name,path;
    transient InputStream content;
@@ -54,12 +59,28 @@ public class FileDescriptionEntity implements Serializable{
       this.assignedRole=assignedRole;
    }
    public boolean isGlobal(){
-      return fileType==ResourceType.GLOBAL;
+      return fileType==ResourceType.Global;
    }
    public boolean isUnzip(){
       return unzip;
    }
+   public File getPathRespectToExecution(PlatformExecution platformExecution){
+       String p=(path.startsWith("/")?path.substring(1):path);
+       p+=p.endsWith("/")?"":"/";
+       return new File(new File(PLATFORMS_FOLDER, platformExecution.getHexId()), p+name);
+   }
    public void setUnzip(boolean unzip){
       this.unzip=unzip;
    }
+    @Override
+    public String toString() {
+        return "FileDescriptionEntity{" +
+                "name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                ", content=" + content +
+                ", fileType=" + fileType +
+                ", assignedRole='" + assignedRole + '\'' +
+                ", unzip=" + unzip +
+                '}';
+    }
 }

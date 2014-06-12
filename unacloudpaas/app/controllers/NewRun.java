@@ -67,18 +67,18 @@ public class NewRun extends Controller {
             for(Map.Entry<String,String> mod:modules.entrySet()){
                 roleDescriptions[e].modules.add(new RolDescription.PuppetModule((Long.parseLong(mod.getValue()))));
             }
-            System.out.println("Modules "+rolId+" "+modules.size());
         }
 
         List<Http.MultipartFormData.FilePart> filesData=request().body().asMultipartFormData().getFiles();
         List<FileDescriptionEntity> files=new ArrayList<>();
-        for(int e=0;e<files.size();e++){
+        for(int e=0;e<filesData.size();e++){
             FileDescriptionEntity fde = new FileDescriptionEntity(filesData.get(e).getFilename(),data.get("filePath" + e));
             try{
                 fde.setContent(new FileInputStream(filesData.get(e).getFile()));
             }catch (IOException ex){}
             fde.setFileType(ResourceType.valueOf(data.get("fileType" + e)));
-            fde.setUnzip(false);
+            fde.setUnzip(fde.getName().endsWith(".zip")&&data.containsKey("fileUnzip"+e)&&data.get("fileUnzip"+e).equals("on"));
+            System.out.println(fde);
         }
         System.out.println("createExecution");
         ClusterManagerBean.createExecution(userId, platformId, executionName, commandArgs, roleDescriptions, files);
