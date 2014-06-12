@@ -106,6 +106,7 @@ public class ClusterManagerBean {
                 for(FileDescriptionEntity fde : files){
                     System.out.println("Procesando "+fde.getName());
                     File dest=fde.getPathRespectToExecution(platformExecution);
+                    System.out.println(dest.getAbsolutePath());
                     try{
                         Files.copy(fde.getContent(),dest.toPath());
                     }catch(Exception ex){
