@@ -72,9 +72,7 @@ public class ClusterManagerBean {
                 }
             }
         }
-        System.out.println(platformExecution);
         Ebean.save(platformExecution);
-        System.out.println(platformExecution.getId());
         ThreadUtils.pool.submit(new Runnable() {
             @Override
             public void run() {

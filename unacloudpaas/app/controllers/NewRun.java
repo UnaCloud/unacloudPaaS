@@ -64,6 +64,9 @@ public class NewRun extends Controller {
             long rolId=parseLong(data.get("rolId"+e));
             roleDescriptions[e]=new RolDescription(rolId,parseInt(data.get("cores"+e)),parseInt(data.get("size"+e)));
             SortedMap<String,String> modules=tData.subMap("rolModule_"+rolId+"_",true,"rolModule_"+(rolId+1)+"_",false);
+            for(Map.Entry<String,String> mod:modules.entrySet()){
+                roleDescriptions[e].modules.add(new RolDescription.PuppetModule((Long.parseLong(mod.getValue()))));
+            }
             System.out.println("Modules "+rolId+" "+modules.size());
         }
 

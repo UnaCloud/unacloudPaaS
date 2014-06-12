@@ -31,7 +31,7 @@ $( document ).ready(function() {
             var moduleId="rolModule_"+selectedRoleId+"_"+ui.item.id;
             $( "#selectModuleDlg" ).dialog("close");
             $( "#roleModules_"+selectedRoleId ).prepend(
-                "<div id=\""+moduleId+"\">"+ui.item.id+" "+ui.item.name+'<input type="hidden" name="'+moduleId+'" value="'+ui.item.name+'"></div>'
+                "<div id=\""+moduleId+"\">"+ui.item.id+" "+ui.item.name+'<input type="hidden" name="'+moduleId+'" value="'+ui.item.id+'"></div>'
             );
             return false;
         }
