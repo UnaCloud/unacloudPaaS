@@ -9,6 +9,7 @@ GET     /newRunConfig               controllers.NewRun.newRun(platformId: Long ?
 POST    /newRunStart                controllers.NewRun.start()
 GET     /running                    controllers.NewRun.runningList()
 GET     /runningHistory             controllers.RunHistory.runningHistory()
+GET     /moduleSearch               @controllers.Modules.search()
 GET     /myFiles                    controllers.Files.index()
 GET     /hello                      controllers.Formulario.sayHello()
 GET     /login                      controllers.Login.login()

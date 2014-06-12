@@ -22,10 +22,7 @@ import views.html.*;
 import java.beans.Expression;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static play.data.Form.*;
 
@@ -52,6 +49,7 @@ public class NewRun extends Controller {
     public static Result start(){
         long userId=1;
         Map<String,String> data=Form.form().bindFromRequest().data();
+        TreeMap tData=new TreeMap<String,String>(data);
         for(Map.Entry<String,String> e:data.entrySet()){
             System.out.println(" "+e.getKey()+" "+e.getValue());
         }
@@ -63,22 +61,20 @@ public class NewRun extends Controller {
         int roles=parseInt(data.get("roles"));
         RolDescription[] roleDescriptions=new RolDescription[roles];
         for(int e=0;e<roles;e++){
-            roleDescriptions[e]=new RolDescription();
-            roleDescriptions[e].id=parseLong(data.get("rolId"+e));
-            roleDescriptions[e].cores=parseInt(data.get("cores"+e));
-            roleDescriptions[e].size=parseInt(data.get("size"+e));
+            long rolId=parseLong(data.get("rolId"+e));
+            roleDescriptions[e]=new RolDescription(rolId,parseInt(data.get("cores"+e)),parseInt(data.get("size"+e)));
+            SortedMap<String,String> modules=tData.subMap("rolModule_"+rolId+"_",true,"rolModule_"+(rolId+1)+"_",false);
+            System.out.println("Modules "+rolId+" "+modules.size());
         }
 
         List<Http.MultipartFormData.FilePart> filesData=request().body().asMultipartFormData().getFiles();
         List<FileDescriptionEntity> files=new ArrayList<>();
         for(int e=0;e<files.size();e++){
-            FileDescriptionEntity fde = new FileDescriptionEntity();
+            FileDescriptionEntity fde = new FileDescriptionEntity(filesData.get(e).getFilename(),data.get("filePath" + e));
             try{
                 fde.setContent(new FileInputStream(filesData.get(e).getFile()));
             }catch (IOException ex){}
             fde.setFileType(ResourceType.valueOf(data.get("fileType" + e)));
-            fde.setPath(data.get("filePath" + e));
-            fde.setName(filesData.get(e).getFilename());
             fde.setUnzip(false);
         }
         System.out.println("createExecution");

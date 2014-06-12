@@ -4,6 +4,8 @@
     <script src="/assets/javascripts/newRunConfig.js"></script>
 }
 @main(title = "New "+platform.name+" run",scripts,menuId="newRunBtn"){
+
+
     <form action="@routes.NewRun.start()" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="platformId" value="@platform.id">
@@ -65,8 +67,9 @@
                         <td>@rol.name</td>
                         <td>@rol.multiplicity.id</td>
                         @if(rol.mountPlatformFolder) {<td>Yes</td>}else{<td>No</td>}
-                        <td>
+                        <td id="roleModules_@rol.id">
 
+                            <div style="cursor: pointer;" class="glyphicon glyphicon-plus" onclick="addModule(@rol.id)"></div>
                         </td>
                         <td>
                             <select name="cores@i" class="select">
@@ -76,7 +79,7 @@
                             </select>
                             </td>
                         <td>
-                            <input style="width: 50px;" name="size@i" value="1" type="text" class="form-control" placeholder="Execution name">
+                            <input style="width: 10px;" id="spinner@i" name="size@i" value="1" placeholder="Execution name">
                         </td>
                     </tr>
                     }
@@ -99,4 +102,7 @@
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
     </script>
 
+    <div id="selectModuleDlg" title="Select module">
+        <input id="tags">
+    </div>
 }

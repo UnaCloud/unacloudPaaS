@@ -59,6 +59,14 @@ public class ClusterManagerBean {
                     rolExecution.coresPerVM=desc.cores;
                     rolExecution.size=desc.size;
                     rolExecution.ramPerCore=1;
+                    for(RolDescription.PuppetModule module:desc.modules){
+                        PuppetModule pm=PuppetModule.find.byId(module.id);
+                        if(pm!=null){
+                            PuppetModuleUsage pmu=new PuppetModuleUsage();
+                            pmu.puppetModule=pm;
+                            rolExecution.puppetModuleUsage.add(pmu);
+                        }
+                    }
                 }
             }
         }

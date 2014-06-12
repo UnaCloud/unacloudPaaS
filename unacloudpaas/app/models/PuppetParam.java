@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class PuppetParam  extends Model {
     @Id
-    public Long id;
+    public long id;
     public String name;
     public String defaultValue;
 
@@ -24,7 +24,7 @@ public class PuppetParam  extends Model {
         this.defaultValue = defaultValue;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

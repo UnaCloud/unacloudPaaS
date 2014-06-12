@@ -4,3 +4,6 @@ html, body {
     font-family: Helvetica, Arial;
     color: #3A4244;
 }
+.ui-autocomplete{
+    z-index: 1503;
+}
