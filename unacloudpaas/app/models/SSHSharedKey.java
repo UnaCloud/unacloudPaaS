@@ -12,20 +12,21 @@ public class SSHSharedKey extends Model{
     @Id
     public Long id;
 
-
-    @ManyToOne
-    public Platform platform;
     @ManyToOne
     public Rol sourceRole;
     @ManyToOne
     public Rol targetRole;
 
-    public Long getId() {
-        return id;
+    public SSHSharedKey() {
     }
 
-    public Platform getPlatform() {
-        return platform;
+    public SSHSharedKey(Rol sourceRole, Rol targetRole) {
+        this.sourceRole = sourceRole;
+        this.targetRole = targetRole;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Rol getSourceRole() {

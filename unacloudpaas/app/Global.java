@@ -72,6 +72,7 @@ public class Global extends GlobalSettings {
                     mpiExecRole.puppetModule=pmuMpi;
                 }
 
+                pMpi.sshSharedKeys.add(new SSHSharedKey(mpiExecRole,mpiExecRole));
                 pMpi.mainCommand=new MainCommand("mpirun -n $exec.cores -hostfile machinesFile",MultiplicityType.ONE, ResourceType.Global,null,mpiExecRole.id);
                 pCondor.mainCommand=new MainCommand("condor_submit",MultiplicityType.ONE, ResourceType.Global,"daemon",condorMasterRole.id);
                 pShell.mainCommand=new MainCommand("sh",MultiplicityType.MANY, ResourceType.Global,"daemon",shellExecRole.id);

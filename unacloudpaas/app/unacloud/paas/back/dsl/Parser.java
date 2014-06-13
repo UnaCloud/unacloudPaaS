@@ -37,7 +37,8 @@ public class Parser{
          for(RolExecution roleExe:platform.rolExecution){
             h+=roleExe.rol.name+",";
             if(roleExe.rol.name.equalsIgnoreCase(part[0])){
-               if(part[1].equalsIgnoreCase("cores"))return ""+roleExe.coresPerVM;
+               if(part[1].equalsIgnoreCase("cores"))return ""+roleExe.getCores();
+               if(part[1].equalsIgnoreCase("coresXVM"))return ""+roleExe.coresPerVM;
                else if(part[1].equalsIgnoreCase("hostname"))return ""+roleExe.nodes.get(0).hostname;
             }
          }
@@ -47,3 +48,4 @@ public class Parser{
       return "$"+token;
    }
 }
+

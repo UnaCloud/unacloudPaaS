@@ -16,7 +16,7 @@ public class Platform extends Model {
 
     @OneToMany(mappedBy = "platform",cascade = CascadeType.PERSIST)
     public List<Rol> roles=new ArrayList<>();
-    @OneToMany(mappedBy = "platform")
+    @OneToMany(mappedBy = "platform",cascade = CascadeType.PERSIST)
     public List<SSHSharedKey> sshSharedKeys=new ArrayList<>();
 
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
