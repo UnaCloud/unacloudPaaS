@@ -70,6 +70,6 @@ public class RolExecution extends Model{
     @Transient
     public VirtualImageRequest generateVirtualMachineRequest(){
         int size = (getCores() - 1) / getCoresPerVM() + 1;
-        return new VirtualImageRequest(size,ramPerCore*coresPerVM,getCores(),rol.imageId,"test");
+        return new VirtualImageRequest(size,ramPerCore*coresPerVM,getCoresPerVM(),rol.imageId,"test");
     }
 }
