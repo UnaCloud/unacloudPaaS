@@ -15,7 +15,7 @@ public class RolDescription {
     public int cores;
     public List<PuppetModule> modules=new ArrayList<>();
 
-    public RolDescription(long id, int size, int cores) {
+    public RolDescription(long id, int cores, int size) {
         this.id = id;
         this.size = size;
         this.cores = cores;
