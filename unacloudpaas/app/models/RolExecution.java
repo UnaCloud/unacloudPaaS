@@ -67,9 +67,22 @@ public class RolExecution extends Model{
     public int getCores(){
         return coresPerVM*size;
     }
+
+    @Override
+    public String toString() {
+        return "RolExecution{" +
+                "size=" + size +
+                ", id=" + id +
+                ", rol=" + rol +
+                ", coresPerVM=" + coresPerVM +
+                ", ramPerCore=" + ramPerCore +
+                '}';
+    }
+
     @Transient
     public VirtualImageRequest generateVirtualMachineRequest(){
+        System.out.println(this);
         int size = (getCores() - 1) / getCoresPerVM() + 1;
-        return new VirtualImageRequest(size,ramPerCore*coresPerVM,getCoresPerVM(),rol.imageId,"test");
+        return new VirtualImageRequest(size,ramPerCore*coresPerVM,coresPerVM,rol.imageId,"test");
     }
 }
