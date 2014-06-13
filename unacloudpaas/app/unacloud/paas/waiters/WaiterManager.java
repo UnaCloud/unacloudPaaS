@@ -12,7 +12,6 @@ public class WaiterManager{
    public static void checkTermination(final PlatformExecution platformExecution){
       if(platformExecution!=null&&platformExecution.getPlatform().getWaiterClass()!=null){
             Waiter w=getWaiter(platformExecution.getPlatform().getWaiterClass());
-            System.out.println("Waiter: "+w+" "+platformExecution.getPlatform().getWaiterClass());
             if(w!=null&&w.hasEnded(platformExecution)){
                 new ClusterManagerBean().stopCluster(platformExecution, ExecutionState.SUCCESS);
             }

@@ -57,9 +57,7 @@ public class CommandWaiter implements Waiter{
         try{
             for(RolExecution role : platform.rolExecution){
                 for(Node node : role.getNodes()){
-                    System.out.println(" "+node.getHostname()+" "+node.waitingCommands.size());
                     for(CommandWait cw : node.waitingCommands){
-                        System.out.println("  "+cw.getId()+" "+cw.status);
                         if(cw.status==ExecutionState.SUCCESS){
                             LogManagerBean.storeLog(new ExecutionLog(platform.getId(), node.getId(),node.getHostname(), "Command " + cw.getProcessId() + " success"));
                             Ebean.update(cw);
@@ -72,7 +70,6 @@ public class CommandWaiter implements Waiter{
         }catch(Exception ex){
             ex.printStackTrace();
         }
-        System.out.println("Complete = "+complete);
         return complete;
     }
 }

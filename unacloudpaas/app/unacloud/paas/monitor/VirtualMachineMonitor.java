@@ -99,7 +99,6 @@ public class VirtualMachineMonitor extends Thread {
 
     private void checkTermination(List<PlatformExecution> platforms) {
         for (PlatformExecution platform : platforms) {
-            System.out.println(platform.getPlatform().getWaiterClass());
             if(platform.getPlatform().getWaiterClass() != null) {
                 WaiterManager.checkTermination(platform);
             }
