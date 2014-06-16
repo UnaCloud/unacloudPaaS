@@ -97,12 +97,12 @@ public class RuntimeRoleExecutionBean {
             script.append(path);
             script.append("\n");
             script.append(Parser.parseFromEnvironment(command.getCommand(),roleConfiguration,plaformConfiguration));
-            script.append(" > uc");
+            /*script.append(" > uc");
             script.append(command.getId());
             script.append(".out");
             script.append(" 2> uc");
             script.append(command.getId());
-            script.append(".err");
+            script.append(".err");*/
             script.append("\n");
 
             try (PrintWriter pw = new PrintWriter(new File(FolderManager.getPlatformFolder(plaformConfiguration.getId()), "unacloudExe.sh"))) {
