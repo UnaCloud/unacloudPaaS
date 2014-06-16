@@ -83,6 +83,6 @@ public class RolExecution extends Model{
     public VirtualImageRequest generateVirtualMachineRequest(){
         System.out.println(this);
         int size = (getCores() - 1) / getCoresPerVM() + 1;
-        return new VirtualImageRequest(size,ramPerCore*coresPerVM,coresPerVM,rol.imageId,"test");
+        return new VirtualImageRequest(size,ramPerCore*coresPerVM*1024,coresPerVM,rol.imageId,"test");
     }
 }
