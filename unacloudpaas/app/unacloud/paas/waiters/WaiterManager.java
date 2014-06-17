@@ -5,6 +5,7 @@ import models.enums.ExecutionState;
 import unacloud.paas.back.beans.ClusterManagerBean;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 public class WaiterManager{
@@ -13,6 +14,7 @@ public class WaiterManager{
       if(platformExecution!=null&&platformExecution.getPlatform().getWaiterClass()!=null){
             Waiter w=getWaiter(platformExecution.getPlatform().getWaiterClass());
             if(w!=null&&w.hasEnded(platformExecution)){
+                System.out.println("Deteniendo plataforma"+platformExecution.getHexId()+" "+platformExecution.getId()+" en "+new Date());
                 new ClusterManagerBean().stopCluster(platformExecution, ExecutionState.SUCCESS);
             }
       }

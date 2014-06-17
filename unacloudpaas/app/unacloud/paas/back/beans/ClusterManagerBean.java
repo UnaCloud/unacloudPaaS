@@ -55,14 +55,12 @@ public class ClusterManagerBean {
             }
         }
         for(RolDescription desc:rolDescriptions){
-            System.out.println(" "+desc);
             for(RolExecution rolExecution: platformExecution.rolExecution ){
                 if(desc.id==rolExecution.rol.id){
                     rolExecution.coresPerVM=desc.cores;
                     rolExecution.size=desc.size;
                     rolExecution.ramPerCore=1;
                     for(RolDescription.PuppetModule module:desc.modules){
-                        System.out.println("  "+module );
                         PuppetModule pm=PuppetModule.find.byId(module.id);
                         if(pm!=null){
                             PuppetModuleUsage pmu=new PuppetModuleUsage();
@@ -155,8 +153,9 @@ public class ClusterManagerBean {
           nodes.addAll(rol.getNodes());
       }
       if(!nodes.isEmpty()){
-         PuppetMaster.stopPuppetCluster(nodes);
-         ClusterServices.stopCluster((int)platformExecution.clusterExecutionId);
+          //TODO quitar este comentario
+         /*PuppetMaster.stopPuppetCluster(nodes);
+         ClusterServices.stopCluster((int)platformExecution.clusterExecutionId);*/
       }
    }
 }

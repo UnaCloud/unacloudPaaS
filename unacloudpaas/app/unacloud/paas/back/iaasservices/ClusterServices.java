@@ -21,16 +21,14 @@ public class ClusterServices {
     static UnaCloudOperations unacloudiaas = new UnaCloudOperations("ga.sotelo69", "NIZOQNBA4BIV5P60776O4DY7QZKGLQY5");
 
     public static DeployedCluster startCluster(VirtualClusterRequest request){
-        System.out.println(request);
         DeploymentWS deployment = unacloudiaas.startVirtualCluster(request);
         if (deployment==null)return null;
 
         DeployedCluster deployedCluster=new DeployedCluster(deployment.getId());
         for(VirtualImageRequest vir:request.getVms())deployedCluster.roles.add(new DeployedClusterRol(vir.getImageId()));
 
-        System.out.println("Levantando "+deployment.getId());
         List<VirtualMachineExecutionWS> vms=new ArrayList<>();
-        ext:for (int e = 0; e < 20; e++) {
+        ext:for (int e = 0; e < 30; e++) {
             PaaSUtils.sleep(30000);
             vms=unacloudiaas.getDeploymentInfo(deployment.getId());
             for (VirtualMachineExecutionWS vme : vms) {

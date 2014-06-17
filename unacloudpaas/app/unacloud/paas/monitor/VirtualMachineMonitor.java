@@ -19,7 +19,7 @@ import java.rmi.server.ExportException;
 import java.util.*;
 
 public class VirtualMachineMonitor extends Thread {
-    private static final int MAX_FAIL = 3;
+    private static final int MAX_FAIL = 4;
     private static VirtualMachineMonitor monitor;
     private static final long WAIT_TIME = 60000;
     private boolean test=false;
@@ -28,7 +28,7 @@ public class VirtualMachineMonitor extends Thread {
         if (monitor == null) {
             monitor = new VirtualMachineMonitor();
             monitor.test=true;
-            monitor.start();
+            //monitor.start();
         }
     }
     public synchronized static void stopMonitor() {
@@ -45,7 +45,6 @@ public class VirtualMachineMonitor extends Thread {
             PaaSUtils.sleep(((System.currentTimeMillis() / WAIT_TIME) + 1) * WAIT_TIME - System.currentTimeMillis());
             List<PlatformExecution> platforms = Ebean.find(PlatformExecution.class).where(Expr.and(Expr.eq("eternal",false),Expr.eq("status",ExecutionState.RUNNING))).findList();
             if (!platforms.isEmpty()) {
-                System.out.println("- Revisando "+platforms.size()+" plataformas");
                 checkFailure(platforms);
                 checkTermination(platforms);
             }
@@ -64,7 +63,6 @@ public class VirtualMachineMonitor extends Thread {
                     }
                 }//TODO arreglar esto
                 if (!failedNodes.isEmpty()) {
-                    System.out.println("Falló un nodo");
                     platforms.remove(p--);
                     FailureRecoveryManager.onMachineFailure(platform, failedNodes);
                 }

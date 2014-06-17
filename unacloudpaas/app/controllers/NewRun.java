@@ -50,9 +50,7 @@ public class NewRun extends Controller {
         long userId=1;
         Map<String,String> data=Form.form().bindFromRequest().data();
         TreeMap tData=new TreeMap<String,String>(data);
-        for(Map.Entry<String,String> e:data.entrySet()){
-            System.out.println(" "+e.getKey()+" "+e.getValue());
-        }
+
         long platformId=parseLong(data.get("platformId"));
         String executionName=data.get("executionName");
 
