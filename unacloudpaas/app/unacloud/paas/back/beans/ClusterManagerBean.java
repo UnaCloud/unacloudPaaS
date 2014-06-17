@@ -153,9 +153,8 @@ public class ClusterManagerBean {
           nodes.addAll(rol.getNodes());
       }
       if(!nodes.isEmpty()){
-          //TODO quitar este comentario
-         /*PuppetMaster.stopPuppetCluster(nodes);
-         ClusterServices.stopCluster((int)platformExecution.clusterExecutionId);*/
+         PuppetMaster.stopPuppetCluster(nodes);
+         ClusterServices.stopCluster((int)platformExecution.clusterExecutionId);
       }
    }
 }
