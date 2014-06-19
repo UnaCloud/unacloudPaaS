@@ -16,6 +16,6 @@ public class RunHistory extends Controller {
         return ok(runningHistory.render(count,PlatformExecution.find.orderBy("id desc").findPagingList(25).getPage(0).getList()));
     }
     public static Result executionLog(Long platformExecutionId) {
-        return ok(viewLog.render(ExecutionLog.find.where(Expr.eq("platformExecutionId",platformExecutionId)).findList()));
+        return ok(viewLog.render(ExecutionLog.find.where(Expr.eq("platformExecutionId",platformExecutionId)).orderBy("id desc").findList()));
     }
 }
