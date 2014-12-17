@@ -33,8 +33,15 @@
                         <li><a href="#">My Profile</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Log out</a></li>
+                <li><a id="logout" href="#">Log out</a></li>
             </ul>
+            <script>
+                $("#logout").click(function(){
+                    $.get("/logout",function(data){
+                        window.location ="/";
+                    });
+                });
+            </script>
         </div>
     </div>
     <!-- /Header -->
@@ -49,7 +56,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li class="nav-header"></li>
                     <li>My Cloud</li>
-                    <li @if(menuId=="btnHome"){class="active"}><a id="btnHome" href="@routes.Home.index()">Home</a></li>
+                    <li @if(menuId=="btnHome"){class="active"}><a id="btnHome" href="@routes.Home.home()">Home</a></li>
                     <li @if(menuId=="newRunBtn"){class="active"}><a id="newRunBtn" href="@routes.NewRun.index()">New Run</a></li>
                     <li @if(menuId=="runningBtn"){class="active"}><a id="runningBtn" href="@routes.NewRun.runningList()">Running (@controllers.NewRun.runningCount())</a></li>
                     <li @if(menuId=="historyBtn"){class="active"}><a id="historyBtn" href="@routes.RunHistory.runningHistory()">Running history</a></li>

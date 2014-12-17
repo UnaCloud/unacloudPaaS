@@ -139,7 +139,7 @@ create table rol_execution (
 
 create table sshshared_key (
   id                        bigint auto_increment not null,
-  platform_id               bigint,
+  platform_id               bigint not null,
   source_role_id            bigint,
   target_role_id            bigint,
   constraint pk_sshshared_key primary key (id))

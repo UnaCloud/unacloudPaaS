@@ -28,7 +28,7 @@ public class VirtualMachineMonitor extends Thread {
         if (monitor == null) {
             monitor = new VirtualMachineMonitor();
             monitor.test=true;
-            monitor.start();
+            //monitor.start();
         }
     }
     public synchronized static void stopMonitor() {

@@ -4,6 +4,8 @@
 
 # Home page
 GET     /                           controllers.Home.index()
+GET     /error                      controllers.Home.error()
+GET     /home                       controllers.Home.home()
 GET     /newRun                     controllers.NewRun.index()
 GET     /newRunConfig               controllers.NewRun.newRun(platformId: Long ?=0)
 POST    /newRunStart                controllers.NewRun.start()
@@ -11,10 +13,10 @@ GET     /running                    controllers.NewRun.runningList()
 GET     /runningHistory             controllers.RunHistory.runningHistory()
 GET     /moduleSearch               @controllers.Modules.search()
 GET     /myFiles                    controllers.Files.index()
-GET     /hello                      controllers.Formulario.sayHello()
-GET     /login                      controllers.Login.login()
-POST    /login                      controllers.Login.authenticate()
 GET     /executionLog               controllers.RunHistory.executionLog(platformExecutionId: Long ?=0)
+
+POST    /authenticate               controllers.Login.authenticate()
+GET     /logout                     controllers.Login.logout()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

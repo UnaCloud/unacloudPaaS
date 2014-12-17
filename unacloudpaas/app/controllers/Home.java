@@ -10,10 +10,14 @@ import static play.data.Form.*;
 
 public class Home extends Controller {
 
-    /**
-     * Home page
-     */
+    @Security.Authenticated(Secured.class)
+    public static Result home() {
+        return ok(home.render());
+    }
     public static Result index() {
-        return ok(index.render());
+        return ok(login.render(false));
+    }
+    public static Result error() {
+        return ok(login.render(true));
     }
 }

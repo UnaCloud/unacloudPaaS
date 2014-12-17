@@ -32,6 +32,7 @@ public class NewRun extends Controller {
         return ok(newRun.render(Ebean.find(Platform.class).findList()));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result newRun(Long platformId) {
         if(platformId==null)return badRequest("Error");
         Platform plat=Ebean.find(Platform.class,platformId);
